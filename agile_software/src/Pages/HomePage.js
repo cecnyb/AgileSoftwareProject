@@ -1,11 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>Welcome to My Page</h1>
-      <p>This is my first React page.</p>
-    </div>
+    <div className="text-center pt-5">
+    <Link to="/PageWithText" className="btn btn-primary">
+      Go to page with text
+    </Link>
+  </div>
   );
 };
 
