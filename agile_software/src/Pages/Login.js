@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import "../Login.css";
 import logo from "../VKLogo.png";
 
@@ -42,7 +44,11 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </label>
-        <button type="submit">Login</button>
+        <button type="submit">
+          <Link to="/" className="plain-link">
+            Login
+          </Link>
+        </button>
       </form>
     </div>
   );
