@@ -44,6 +44,9 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </label>
+        <a href="PageWithText" class="italic-link"> 
+          Forgot your password?
+        </a>
         <button type="submit">
           <Link to="/" className="plain-link">
             Login

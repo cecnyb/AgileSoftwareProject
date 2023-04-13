@@ -57,3 +57,12 @@ button:hover {
   text-decoration: none; /* removes the default underline */
   font-weight: bold; /* makes the text bold */
 }
+
+img {
+  padding-top: 5rem;
+}
+
+.italic-link {
+  font-style:italic; 
+  color: rgb(142, 142, 142);
+}
