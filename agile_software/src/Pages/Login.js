@@ -44,7 +44,7 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </label>
-        <a href="PageWithText" class="italic-link"> 
+        <a href="mailto:kundsupport@vkvattenskoter.com?subject=Forgot Password" class="italic-link"> 
           Forgot your password?
         </a>
         <button type="submit">
