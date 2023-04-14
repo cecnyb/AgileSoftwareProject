@@ -1,12 +1,20 @@
 import React from "react";
+import chapters from '../chapters'
 
 const PageWithText = () => {
     return (
         <div>
-         <h1>Welcome to the page with text</h1>
-      <p>This is the page with text.</p>
-    </div>
-  );
+          <a href="/">Go back to the HomePage</a>
+          {chapters[0].content.map((item, index) => (
+            <div key={index}>
+              <h3>{item.header}</h3>
+              <p>{item.text}</p>
+            </div>
+              )
+            )
+          } 
+        </div> 
+    );
 };
 
 export default PageWithText;
