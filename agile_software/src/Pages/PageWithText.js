@@ -1,10 +1,13 @@
 import React from "react";
 import chapters from '../chapters'
+import { Link } from "react-router-dom";
 
 const PageWithText = () => {
     return (
         <div>
-          <a href="/">Go back to the HomePage</a>
+          <Link to="/HomePage" className="btn btn-primary">
+          Go back to the HomePage
+          </Link>
           {chapters[0].content.map((item, index) => (
             <div key={index}>
               <h3>{item.header}</h3>
