@@ -48,7 +48,7 @@ function Login() {
           Forgot your password?
         </a>
         <button type="submit">
-          <Link to="/" className="plain-link">
+          <Link to="/HomePage" className="plain-link">
             Login
           </Link>
         </button>
