@@ -1,13 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import chapters from "../chapters";
+import ChapterComponent from "../Components/ChapterComponent";
 
 
-const HomePage = () => {
+function HomePage () {
   return (
     <div className="text-center pt-5">
-    <Link to="/PageWithText" className="btn btn-primary">
-      Go to page with text
-    </Link>
+    {chapters.map((chapter) => (
+        <ChapterComponent chapter={chapter} key={chapter.id} />
+      ))}
   </div>
   );
 };
