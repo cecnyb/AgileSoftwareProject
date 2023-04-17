@@ -1,8 +1,8 @@
-import { signOut } from "./firebase";
+import { signout } from "./firebase";
 
 const Profile = () => {
   const handleLogout = async () => {
-   await signOut();
+   await signout();
   };
   return (
     <>

@@ -8,14 +8,11 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== password2) {
-      seterror("Passwords do not match");
-    } else {
-      setEmail("");
-      setPassword("");
-      const res = await signUp(email, password);
-      if (res.error) seterror(res.error)
-    }
+    setEmail("");
+    setPassword("");
+    const res = await signUp(email, password);
+    if (res.error) seterror(res.error)
+ 
   };
 
   return (

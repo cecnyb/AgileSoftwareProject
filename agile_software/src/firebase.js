@@ -1,6 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+  } from "firebase/auth";
+  import { getFirestore, addDoc, collection } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,20 +22,6 @@ const firebaseConfig = {
   appId: "1:967558583555:web:be81fea2b86c02be494536",
   measurementId: "G-CP25S8F63K"
 };
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-  } from "firebase/auth";
-  import { getFirestore, addDoc, collection } from "firebase/firestore";
-  const db = getFirestore();
-  const auth = getAuth();
 
 // Sign up
 const signUp = async (email, password) => {
@@ -65,7 +58,7 @@ const signUp = async (email, password) => {
     };
 
 // Sign out
-const signOut = async() => {
+const signout = async() => {
     try {
       await signOut(auth)
       return true
@@ -73,5 +66,13 @@ const signOut = async() => {
       return false
     }
   };
+
+  // Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore();
+const auth = getAuth();
+const analytics = getAnalytics(app);
+
+export {signout, signUp, signIn};
 
 
