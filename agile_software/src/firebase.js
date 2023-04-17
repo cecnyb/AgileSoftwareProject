@@ -19,3 +19,13 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+  } from "firebase/auth";
+  import { getFirestore, addDoc, collection } from "firebase/firestore";
+  const db = getFirestore();
+  const auth = getAuth();
