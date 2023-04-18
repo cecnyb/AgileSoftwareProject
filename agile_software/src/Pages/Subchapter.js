@@ -3,9 +3,10 @@ import chapters from '../chapters'
 import { Link, useParams } from "react-router-dom";
 
 
-function ChapterContent(props)  {
-    const { chapterId } = useParams()
+function Subchapter(props)  {
+    const { subchapterId } = useParams()
     const chapter = chapters.find(chapter => chapter.id === parseInt(chapterId))
+    const subchapter = course.lessons.find(lesson => lesson.id === parseInt(lessonId))
     return (
         <div className="Lesson page">
           <header>
@@ -16,7 +17,7 @@ function ChapterContent(props)  {
           </header>
 
            <div>
-          {chapter.content.map((item, index) => (
+          {chapter.subchapters.map((item, index) => (
             <div key={index}>
               <h3>{item.header}</h3>
               <p>{item.text}</p>
@@ -29,4 +30,4 @@ function ChapterContent(props)  {
     );
 };
 
-export default ChapterContent;
+export default Subchapter;
