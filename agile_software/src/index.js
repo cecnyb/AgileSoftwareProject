@@ -4,8 +4,8 @@ import './index.css';
 import ReactDOM from "react-dom";
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./Signin";
-import Signup from './Signup';
+import Login from "./Pages/Signin";
+import Signup from './Pages/Signup';
 import Profile from "./Profile";
 import App from './App';
 import { AuthProvider } from "./AuthProvider";
@@ -17,8 +17,7 @@ ReactDOM.render(
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="profile" element={<Profile />} />
           </Routes>

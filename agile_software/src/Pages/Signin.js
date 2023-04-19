@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { signIn } from "./firebase";
-import "./Login.css"; 
-import logo from  "./VKLogo.png"
+import { signIn } from "../firebase";
+import "../Login.css"; 
+import logo from  "../VKLogo.png"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -34,12 +34,16 @@ const Login = () => {
           placeholder="Your Password"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <div style={{ marginTop: '1rem' }}>
+            <a href="/Signup" className="italic-link" style={{ marginRight: '12rem' }}>
+                Sign up
+            </a>
+            <a href="mailto:kundsupport@vkvattenskoter.com?subject=Forgot Password" className="italic-link"> 
+                Forgot your password?
+            </a>
+        </div>
 
-        <a href="mailto:kundsupport@vkvattenskoter.com?subject=Forgot Password" class="italic-link"> 
-          Forgot your password?
-        </a>
-
-        <input type="submit" value="submit" class="login-button"
+        <input type="submit" value="Submit" class="login-button"
         />
         
         

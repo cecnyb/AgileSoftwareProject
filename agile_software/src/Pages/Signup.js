@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signUp } from "./firebase";
+import { signUp } from "../firebase";
+import "../Login.css"; 
+import logo from  "../VKLogo.png";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,8 +19,9 @@ const Signup = () => {
 
   return (
     <>
-      <h2>Sign Up</h2>
-      <div>
+      <div className="login-container"> 
+        <img src={logo} alt="Logo" height={"50%"} width={"30%"}></img>
+        <h2>Sign Up</h2>
         {error ? <div>{error}</div> : null}
         <form onSubmit={handleSubmit}>
           <input
@@ -40,7 +43,7 @@ const Signup = () => {
           <button type="submit">Submit</button>
         </form>
         <p>
-          already registered? <Link to="/login">Login</Link>
+          Already registered? <Link to="/login">Login</Link>
         </p>
       </div>
     </>
