@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { signIn } from "./firebase";
+import "./Login.css"; 
+import logo from  "./VKLogo.png"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +15,9 @@ const Login = () => {
     if (res.error) seterror(res.error);
   };
   return (
-    <>
+    <div className="login-container">
+      <img src={logo} alt="Logo" height={"50%"} width={"30%"}></img>
+      <h1>Välkommen till din utbildning</h1>
       {error ? <div>{error}</div> : null}
       <form onSubmit={handleSubmit}>
         <input
@@ -30,9 +34,17 @@ const Login = () => {
           placeholder="Your Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <input type="submit" value="submit" />
+
+        <a href="mailto:kundsupport@vkvattenskoter.com?subject=Forgot Password" class="italic-link"> 
+          Forgot your password?
+        </a>
+
+        <input type="submit" value="submit" 
+        />
+        
+        
       </form>
-    </>
+    </div>
   );
 };
 
