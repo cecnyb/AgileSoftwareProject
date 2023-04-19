@@ -70,3 +70,15 @@ img {
 .italic-link:hover {
   text-decoration: underline;
 }
+
+.login-button {
+  padding: 0.5rem;
+  border: none;
+  background-color: #2b4aa1;
+  color: #fff;
+  font-size: 1rem;
+  width: 100%;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}

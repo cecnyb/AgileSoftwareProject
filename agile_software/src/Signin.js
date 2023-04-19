@@ -39,7 +39,7 @@ const Login = () => {
           Forgot your password?
         </a>
 
-        <input type="submit" value="submit" 
+        <input type="submit" value="submit" class="login-button"
         />
         
         
