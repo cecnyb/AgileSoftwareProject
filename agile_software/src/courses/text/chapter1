@@ -1,0 +1,39 @@
+{
+  "title": "Chapter 1: Introduction",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Section 1: The Beginning"
+    },
+    {
+      "type": "paragraph",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet tellus eu ultrices volutpat."
+    },
+    {
+      "type": "image",
+      "src": "./images/chapter1/image1.jpg",
+      "alt": "Image 1"
+    },
+    {
+      "type": "heading",
+      "text": "Section 2: The Middle"
+    },
+    {
+      "type": "paragraph",
+      "text": "Mauris at aliquet lorem. Aliquam ut risus id neque congue malesuada."
+    },
+    {
+      "type": "image",
+      "src": "./images/chapter1/image2.jpg",
+      "alt": "Image 2"
+    },
+    {
+      "type": "heading",
+      "text": "Section 3: The End"
+    },
+    {
+      "type": "paragraph",
+      "text": "Praesent eu neque gravida, fringilla velit in, pharetra eros."
+    }
+  ]
+}
