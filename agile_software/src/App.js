@@ -1,8 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
+import Login from "./Pages/Signin";
+import Signup from './Pages/Signup';
+import Profile from "./Profile";
 import Subchapter from "./Pages/Subchapter";
-import Login from "./Pages/Login";
 import Chapter from "./Pages/Chapter";
+
 
 function App() {
   return (
