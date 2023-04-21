@@ -9,7 +9,7 @@ function SubchapterComponent(props) {
               <h2>
                 <Link
                   className="no-underline cursor-pointer"
-                  to={'/subchapter/' + props.subchapter.id}
+                  to={'/chapter/'+ props.chapterId +'/subchapter/' + props.subchapter.id}
                 >
                   {props.subchapter.title}
                 </Link>

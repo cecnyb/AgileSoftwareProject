@@ -10,9 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/HomePage" element={<HomePage />} />
-        <Route path="/chapters/:chapterId" element={<Chapter/>}/>
-        <Route path="/chapters/:chapterId/subchapters/:subchapterId" element={<Subchapter/>}/>
-
+        <Route path="/chapter/:chapterId" element={<Chapter/>}/>
+        <Route path="/chapter/:chapterId/subchapter/:subchapterId" element={<Subchapter/>}/>
       </Routes>
     </div>
   );
