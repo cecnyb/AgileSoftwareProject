@@ -32,7 +32,6 @@ input {
   border-bottom: 1px solid #ccc;
   font-size: 1rem;
   width: 100%;
-  margin-top: 0.5rem;
 }
 
 button {
@@ -81,9 +80,7 @@ img {
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
-
-.flex-row{
-  display: flex;
-  flex-direction: row;
-  justifyContent: 'space-between'
+p {
+  margin:0rem;
+  padding:0rem;
 }
