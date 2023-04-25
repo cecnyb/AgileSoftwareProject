@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 
 
 
+
 function Subchapter()  {
     const { subchapterId } = useParams()
     const { chapterId } = useParams()
@@ -19,16 +20,17 @@ function Subchapter()  {
           Go back to the HomePage
           </Link> 
           { <h1>{subchapter.title}</h1> }
-          <img src={"../VKLogo.png"} height={"50%"} width={"30%"}></img>
+          <img src={require("../VKLogo.png")} alt="logo" className="brand-logo"/>
           </header>
 
-
+          
            {  <div>
            {subchapter.content.map((item, index) => (
             <div key={index}>
               <h3>{item.header}</h3>
               <p>{item.text}</p>
-              <img src={`${process.env.PUBLIC_URL}/Images/` + item.image} alt={item.header} style={{ height: "auto", width: "100%" }}/>
+              {/* check if there is an image*/}
+              {item.image &&  <img src={process.env.PUBLIC_URL + item.image} alt="" /> }
             </div> 
               ) 
             )
