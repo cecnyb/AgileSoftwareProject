@@ -35,18 +35,16 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div style={{ marginTop: '1rem' }}>
-            <a href="/Signup" className="italic-link" style={{ marginRight: '12rem' }}>
+            <a href="/Signup" style={{ textAlign:'left'}} className="italic-link" >
                 Sign up
             </a>
-            <a href="mailto:kundsupport@vkvattenskoter.com?subject=Forgot Password" className="italic-link"> 
+            <a href="mailto:kundsupport@vkvattenskoter.com?subject=Forgot Password"  style={{ textAlign:'right'}} className="italic-link" > 
                 Forgot your password?
             </a>
         </div>
 
         <input type="submit" value="Submit" class="login-button"
         />
-        
-        
       </form>
     </div>
   );

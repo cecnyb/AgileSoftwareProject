@@ -9,6 +9,7 @@ import Signup from './Pages/Signup';
 import Profile from "./Profile";
 import App from './App';
 import { AuthProvider } from "./AuthProvider";
+import DatabaseAccess from "./Pages/DatabaseAccess";
 
 //const root = ReactDOM.createRoot(document.getElementById('root'));
 //root.render(
@@ -20,6 +21,7 @@ ReactDOM.render(
             <Route path="/" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="databaseaccess" element={<DatabaseAccess />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
