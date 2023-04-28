@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Signin";
 import Signup from './Pages/Signup';
 import Profile from "./Profile";
+import DatabaseAccess from "./Pages/DatabaseAccess";
 import HomePage from "./Pages/HomePage";
 import Subchapter from "./Pages/Subchapter";
 import Chapter from "./Pages/Chapter";
@@ -22,6 +23,7 @@ ReactDOM.render(
             <Route path="/" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="databaseaccess" element={<DatabaseAccess />} />
             <Route path="/HomePage" element={<HomePage />} />
             <Route path="/chapter/:chapterId" element={<Chapter/>}/>
             <Route path="/chapter/:chapterId/subchapter/:subchapterId" element={<Subchapter/>}/>
