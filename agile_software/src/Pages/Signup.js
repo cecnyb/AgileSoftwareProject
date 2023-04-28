@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { signUp } from "../firebase";
 import "../Login.css"; 
 import logo from  "../VKLogo.png";
+
+
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,14 +23,14 @@ const Signup = () => {
     <>
       <div className="login-container"> 
         <img src={logo} alt="Logo" height={"50%"} width={"30%"}></img>
-        <h2>Sign Up</h2>
+        <h2>Registera dig och starta din utbildning nu!</h2>
         {error ? <div>{error}</div> : null}
         <form onSubmit={handleSubmit}>
           <input
             type="email"
             name="email"
             value={email}
-            placeholder="Your Email"
+            placeholder="E-post"
             required
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -36,14 +38,14 @@ const Signup = () => {
             type="password"
             name="password"
             value={password}
-            placeholder="Your Password"
+            placeholder="Lösenord"
             required
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Registrera dig</button>
         </form>
         <p>
-          Already registered? <Link to="/">Login</Link>
+          Redan registerad? <Link to="/">Logga in</Link>
         </p>
       </div>
     </>
