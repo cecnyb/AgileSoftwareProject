@@ -24,7 +24,7 @@ const firebaseConfig = {
 };
 
 // Sign up
-const signUp = async (email, password) => {
+const signUp = async (email, password, isUtbildare) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -32,10 +32,20 @@ const signUp = async (email, password) => {
         password
       );
       const user = userCredential.user;
-      await addDoc(collection(db, "users"), {
-        uid: user.uid,
-        email: user.email,
-      });
+      if (isUtbildare) {
+        await addDoc(collection(db, "users"), {
+                uid: user.uid,
+                email: user.email,
+                role: "teacher",
+                students: []
+              });
+      } else {
+        await addDoc(collection(db, "users"), {
+                uid: user.uid,
+                email: user.email,
+                role: "student"
+              });
+      }
       return true
     } catch (error) {
       return {error: error.message}

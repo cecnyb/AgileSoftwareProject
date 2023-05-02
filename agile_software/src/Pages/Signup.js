@@ -8,13 +8,15 @@ import logo from  "../VKLogo.png";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isUtbildare, setIsUtbildare] = useState("");
   const [error, seterror] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setEmail("");
     setPassword("");
-    const res = await signUp(email, password);
+    setIsUtbildare("");
+    const res = await signUp(email, password, isUtbildare);
     if (res.error) seterror(res.error)
  
   };
@@ -42,6 +44,15 @@ const Signup = () => {
             required
             onChange={(e) => setPassword(e.target.value)}
           />
+        <label>
+          Utbildare:
+          <input
+            name="isUtbildare"
+            type="checkbox"
+            checked={isUtbildare} //Funkar ej att unchecka checkboxen
+            onChange={(e) => setIsUtbildare(e.target.value)}
+          />
+        </label>
           <button type="submit">Registrera dig</button>
         </form>
         <p>
