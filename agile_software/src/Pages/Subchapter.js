@@ -1,6 +1,7 @@
 import React from "react";
 import chapters from '../chapters'
 import { Link, useParams } from "react-router-dom";
+import SideNavBar from "../Components/SideNavBar";
 
 
 function Subchapter()  {
@@ -17,6 +18,7 @@ function Subchapter()  {
           </Link> 
           { <h1>{subchapter.title}</h1> }
 
+          <SideNavBar chapter={chapter}/>
           </header>
 
            {  <div>
