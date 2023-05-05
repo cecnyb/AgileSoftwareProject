@@ -1,0 +1,13 @@
+What do I want to learn or understand better? Consider e.g. teamwork, Scrum, agile processes, technologies etc? 
+This weeks teamwork could have been a a little bit better, we worked two people together and kind of went our own way when problems occured
+instead of comunicating and making a plan together. We both just wanted to fix it so that the code would work but the code just became messier
+and messier. In the end, we could not solve the problem. 
+
+What is my contribution towards the team’s deliveries? How can I help my team do better next sprint?
+Me and Lucas worked with adding a checkbox, the checkbox is now clickable but the connection to the right subchapter does not work. We tried to add 
+the completed subchapters to an array but that did not work either. When the checkbox is 
+clicked, all subchapters are marked as completed. We will work more on this in the next week. We also did some css. 
+
+
+Changes/improvements from last week's reflection?
+We tried to estimate more carefully, but this weeks user stories still turned out to be harder than expected. 

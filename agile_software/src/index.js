@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Signin";
 import Signup from './Pages/Signup';
 import Profile from "./Profile";
+import App from './App';
 import DatabaseAccess from "./Pages/DatabaseAccess";
 import HomePage from "./Pages/HomePage";
 import Subchapter from "./Pages/Subchapter";
@@ -33,8 +34,6 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById("root")
 );
-
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
