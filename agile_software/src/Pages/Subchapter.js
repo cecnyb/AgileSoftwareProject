@@ -1,9 +1,9 @@
-import React from "react";
+
 import chapters from '../chapters'
 import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import '../Subchapter.css';
 import SideNavBar from "../Components/SideNavBar";
-
-
 
 
 
@@ -13,19 +13,35 @@ function Subchapter()  {
     const { chapterId } = useParams()
     const chapter = chapters.find(chapter => chapter.id === parseInt(chapterId))
     const subchapter = chapter.subchapters.find(subchapter => subchapter.id === parseInt(subchapterId))
+    const [checked, setChecked] = React.useState(false);
+
+    const handleChange = () => {
+      setChecked(!checked); 
+    };
+
+    useEffect(() => {
+      const persistedValue = localStorage.getItem('myComponent.checked');
+      if (persistedValue !== null) {
+        setChecked(JSON.parse(persistedValue));
+      }
+    }, []); 
+
+    useEffect(() => {
+      localStorage.setItem('myComponent.checked', JSON.stringify(checked));
+    }, [checked]); // run this effect whenever the `checked` value change
     
     return (
-        <div className="Lesson page">
+        <div className="Lesson-Page">
           <header>
            <Link to="/HomePage" className="btn btn-primary">
           Go back to the HomePage
           </Link> 
           { <h1>{subchapter.title}</h1> }
           
-          <img src={require("../VKLogo.png")} alt="logo" className="brand-logo"/>
-
+         
+          <SideNavBar chapter={chapter}/> 
           </header>
-
+       
           
            {  <div>
            {subchapter.content.map((item, index) => (
@@ -63,10 +79,28 @@ function Subchapter()  {
           </Link>
          )}
         </div>
+        <Checkbox
+        label="My Value"
+         value={checked}
+         onChange={handleChange}
+      />
 
 
       </div>
     );
+};
+
+const Checkbox = ({ label, value, onChange }) => {
+  const handleCheckboxChange = (event) => {
+    onChange(event);
+    
+  };
+  return (
+    <label>
+      <input type="checkbox" checked={value} onChange={onChange}  />      
+        {(value === true) ? (label = "Completed") : (label = "Mark as completed")}
+    </label>
+  );
 };
 
 export default Subchapter;
