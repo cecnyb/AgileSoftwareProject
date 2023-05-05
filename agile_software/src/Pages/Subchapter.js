@@ -4,6 +4,10 @@ import { Link, useParams } from "react-router-dom";
 import SideNavBar from "../Components/SideNavBar";
 
 
+
+
+
+
 function Subchapter()  {
     const { subchapterId } = useParams()
     const { chapterId } = useParams()
@@ -17,20 +21,50 @@ function Subchapter()  {
           Go back to the HomePage
           </Link> 
           { <h1>{subchapter.title}</h1> }
+          
+          <img src={require("../VKLogo.png")} alt="logo" className="brand-logo"/>
 
-          <SideNavBar chapter={chapter}/>
           </header>
 
+          
            {  <div>
            {subchapter.content.map((item, index) => (
             <div key={index}>
               <h3>{item.header}</h3>
               <p>{item.text}</p>
+              {/* check if there is an image*/}
+              {item.image &&  <img src={process.env.PUBLIC_URL + item.image} alt="" /> }
             </div> 
               ) 
             )
           }  
         </div>  } 
+
+        <div className="navigateToNextBtn">
+         {subchapterId < chapter.subchapters.length && (
+          <Link to={'/chapter/'+ chapterId +'/subchapter/' +(subchapter.id + 1)}>
+            Next Subchapter
+          </Link>
+         )}
+        </div>
+         
+         <div className="navigateToPrevBtn">
+         {subchapterId > 1 && (
+          <Link classname = "text-center pt-5" to={'/chapter/'+ chapterId +'/subchapter/' +(subchapter.id - 1)}>
+            Previous Subchapter
+          </Link>
+         )}
+          </div>
+
+          <div className="navigateToHomePageBtn">
+         {subchapterId == chapter.subchapters.length && (
+          <Link to={'/HomePage'}>
+            Back to home page (quiz when that is implemented)
+          </Link>
+         )}
+        </div>
+
+
       </div>
     );
 };

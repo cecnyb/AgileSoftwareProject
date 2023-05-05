@@ -8,10 +8,11 @@ import Login from "./Pages/Signin";
 import Signup from './Pages/Signup';
 import Profile from "./Profile";
 import App from './App';
-import { AuthProvider } from "./AuthProvider";
+import DatabaseAccess from "./Pages/DatabaseAccess";
+import HomePage from "./Pages/HomePage";
 import Subchapter from "./Pages/Subchapter";
 import Chapter from "./Pages/Chapter";
-import HomePage from "./Pages/HomePage";
+import { AuthProvider } from "./AuthProvider"; //Has to be the last import statement, else it doesn't work
 
 //const root = ReactDOM.createRoot(document.getElementById('root'));
 //root.render(
@@ -23,6 +24,7 @@ ReactDOM.render(
             <Route path="/" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="databaseaccess" element={<DatabaseAccess />} />
             <Route path="/HomePage" element={<HomePage />} />
             <Route path="/chapter/:chapterId" element={<Chapter/>}/>
             <Route path="/chapter/:chapterId/subchapter/:subchapterId" element={<Subchapter/>}/>

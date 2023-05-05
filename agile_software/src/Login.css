@@ -64,6 +64,7 @@ img {
   font-style:italic; 
   color: rgb(142, 142, 142);
   text-decoration: none;
+  text-align: none;
 }
 .italic-link:hover {
   text-decoration: underline;
