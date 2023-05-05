@@ -1,33 +1,35 @@
 import { Link } from "react-router-dom";
-import '/Users/wille/Code/DAT257/AgileSoftwareProject/agile_software/src/styles/SideNavBar.css';
+import PropTypes from "prop-types";
+import "../styles/SideNavBar.css";
+import HomePageLink from "./HomePageLink.js";
 
 function SideNavBar(props) {
-    return (
+  return (
     <nav className="navigation">
-        <ul>
-            <h1 className="chapter-title">
-                {props.chapter.title}
-            </h1>
-            {props.chapter.subchapters.map((subchapter) => (
-                        <li>
-                            <Link
-                                className="no-underline cursor-pointer"
-                                to={'/chapter/' + props.chapter.id + '/subchapter/' + subchapter.id}
-                                >
-                                    {subchapter.title}
-                            </Link>
-                        </li>
-                    )
-                )
-            } 
-        </ul>
+      <ul>
+        <li>
+          <HomePageLink />
+        </li>
+        <li>
+          <h3 className="chapter-title">{props.chapter.id}{' '}{props.chapter.title}</h3>
+        </li>
+        {props.chapter.subchapters.map((subchapter) => (
+          <li key={subchapter.id}>
+            <Link
+              className="subchapter-link"
+              to={`/chapter/${props.chapter.id}/subchapter/${subchapter.id}`}
+            >
+              {props.chapter.id}{'.'}{subchapter.id}{' '}{subchapter.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </nav>
-     );
-    };
+  );
+}
 
-    export default SideNavBar;
+SideNavBar.propTypes = {
+    chapter: PropTypes.object.isRequired,
+  };
 
-
-
-
-
+export default SideNavBar;
