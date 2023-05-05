@@ -8,7 +8,7 @@ function Chapter() {
         const { chapterId } = useParams()
         const chapter = chapters.find(chapter => chapter.id === parseInt(chapterId))
         return (
-            <div className="Lesson page">
+            <div className="Lesson-Page">
               <header>
               <Link to="/HomePage" className="btn btn-primary">
               Go back to the HomePage

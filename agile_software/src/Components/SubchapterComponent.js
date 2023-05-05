@@ -14,6 +14,7 @@ function SubchapterComponent(props) {
                   {props.subchapter.title}
                 </Link>
               </h2>
+              
             </div>
           </div>
         </section>
