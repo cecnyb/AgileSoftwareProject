@@ -1,6 +1,7 @@
 import React from "react";
 import chapters from '../chapters'
 import { Link, useParams } from "react-router-dom";
+import SideNavBar from "../Components/SideNavBar";
 
 
 
@@ -20,7 +21,9 @@ function Subchapter()  {
           Go back to the HomePage
           </Link> 
           { <h1>{subchapter.title}</h1> }
+          
           <img src={require("../VKLogo.png")} alt="logo" className="brand-logo"/>
+
           </header>
 
           
