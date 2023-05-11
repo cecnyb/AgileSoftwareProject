@@ -2,9 +2,11 @@ import React from "react";
 import chapters from '../chapters'
 import { Link, useParams } from "react-router-dom";
 import SubchapterComponent from '../Components/SubchapterComponent';
+import useRequireAuth from '../AuthenticateUser';
 
 
 function Chapter() {
+        const currentUser = useRequireAuth();
         const { chapterId } = useParams()
         const chapter = chapters.find(chapter => chapter.id === parseInt(chapterId))
         return (
