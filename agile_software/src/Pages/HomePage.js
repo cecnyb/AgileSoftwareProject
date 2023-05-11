@@ -28,7 +28,8 @@ function HomePage() {
     };
     const fetchStudents = async() =>{
       try {
-      setStudents(await getStudents)
+      const userStudents = await getStudents(currentUser);
+      setStudents(userStudents);
       }
     catch (error) {
       console.error('Error fetching students', error);
@@ -63,7 +64,7 @@ function HomePage() {
           Dina studenter
         </h1>
         <li>
-          
+          {students}
         </li>
         <form onSubmit={handleSubmit}>
         <input type="submit" value="Logga ut" />

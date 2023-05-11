@@ -13,7 +13,7 @@ export const getStudents = async (currentUser) => {
     }
     return null;
   } catch (error) {
-    console.error('Error retrieving user email:', error);
+    console.error('Error retrieving students:', error);
     return null;
   }
 };
