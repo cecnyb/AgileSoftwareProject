@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {
@@ -24,7 +23,7 @@ const firebaseConfig = {
 };
 
 // Sign up
-const signUp = async (email, password) => {
+const signUp = async (email, password, isUtbildare) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -32,10 +31,20 @@ const signUp = async (email, password) => {
         password
       );
       const user = userCredential.user;
-      await addDoc(collection(db, "users"), {
-        uid: user.uid,
-        email: user.email,
-      });
+      if (isUtbildare) {
+        await addDoc(collection(db, "users"), {
+                uid: user.uid,
+                email: user.email,
+                role: "teacher",
+                students: []
+              });
+      } else {
+        await addDoc(collection(db, "users"), {
+                uid: user.uid,
+                email: user.email,
+                role: "student"
+              });
+      }
       return true
     } catch (error) {
       return {error: error.message}
@@ -74,5 +83,4 @@ const auth = getAuth();
 const analytics = getAnalytics(app);
 
 export {signout, signUp, signIn};
-
 
