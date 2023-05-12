@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebaseinit';
+import {doc, getDoc } from 'firebase/firestore';
 import StudentComponent from '../Components/StudentComponent';
 
 function StudentPage() {
@@ -9,7 +10,6 @@ function StudentPage() {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const db = getFirestore();
         const teacherDocRef = doc(db, 'users', 'oWE1rNMoTAVGHRIQzI9x'); // Replace 'teacherId' with the actual teacher document ID
         const teacherDoc = await getDoc(teacherDocRef);
 
