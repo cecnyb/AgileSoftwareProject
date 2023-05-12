@@ -69,10 +69,10 @@ const signout = async() => {
 
   // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore();
-const auth = getAuth();
+const db = getFirestore(app);
+const auth = getAuth(app);
 const analytics = getAnalytics(app);
 
-export {signout, signUp, signIn};
+export {signout, signUp, signIn, auth, db, app};
 
 
