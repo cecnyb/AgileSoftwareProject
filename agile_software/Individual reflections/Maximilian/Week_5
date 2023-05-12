@@ -1,0 +1,14 @@
+1.
+I feel as if I finally have a better grip on JavaScript, although much left to learn.
+I would mainly ike to learn more about agile methodologies. Having worked with it for over a month, I am starting
+to see the advantages of using it. It would be interesting to learn even more about more specific details, specifically more about scrum.
+I feel as if we are still only scratching the surface of agile.
+2.
+This week Jonas, Oliver and I finally were able to implement access-roles, and subsequently create different homepages for different types of users.
+Although we had to deviate from our original plan it now works well. We originally planned to use Firebase's built in userTokens, although these proved 
+to be very difficult so we instead used a user-database in firestore to store user-roles. This works fine, and we believe that it is relatively safe from
+a cybersecurity perspective (although arguably not as safe as firebases userTokens).
+3.
+Teamwork was once again good. There were some minor communication issues as we on the backend also implemented different homepages (which frontend were supposed to do).
+However, this was the only way for us to test that our code worked. In retrospect we should have realized already at sprint-planning that the two user-stories overlapped.
+However, we can still use the CSS code from frontend on our backend-homepages, so no big deal. Pair-programming again worked very well.
