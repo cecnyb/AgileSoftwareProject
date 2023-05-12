@@ -4,6 +4,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import { doc, setDoc } from "firebase/firestore"; 
 import "../DatabaseAccess.css"; 
+import useRequireAuth from '../AuthenticateUser';
 
 firebase.initializeApp({
     apiKey: "AIzaSyBMg7qvLxlpbnM1ayFnep7Y_xShenT8EkQ",
@@ -99,6 +100,7 @@ function RemoveItemForm() {
 }
 
 function DatabaseAccess() {
+  const currentUser = useRequireAuth();
   return (
     <div>
       <AddItemForm />

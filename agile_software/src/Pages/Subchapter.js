@@ -4,11 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import '../Subchapter.css';
 import SideNavBar from "../Components/SideNavBar";
-
+import useRequireAuth from '../AuthenticateUser';
 
 
 
 function Subchapter()  {
+    const currentUser = useRequireAuth();
     const { subchapterId } = useParams()
     const { chapterId } = useParams()
     const chapter = chapters.find(chapter => chapter.id === parseInt(chapterId))
