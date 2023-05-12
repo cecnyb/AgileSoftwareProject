@@ -12,6 +12,7 @@ import DatabaseAccess from "./Pages/DatabaseAccess";
 import HomePage from "./Pages/HomePage";
 import Subchapter from "./Pages/Subchapter";
 import Chapter from "./Pages/Chapter";
+import ModOverview from "./Pages/ModOverview";
 import { AuthProvider } from "./AuthProvider"; //Has to be the last import statement, else it doesn't work
 
 //const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,6 +26,7 @@ ReactDOM.render(
             <Route path="signup" element={<Signup />} />
             <Route path="profile" element={<Profile />} />
             <Route path="databaseaccess" element={<DatabaseAccess />} />
+            <Route path="/modoverview" element={<ModOverview />} />
             <Route path="/HomePage" element={<HomePage />} />
             <Route path="/chapter/:chapterId" element={<Chapter/>}/>
             <Route path="/chapter/:chapterId/subchapter/:subchapterId" element={<Subchapter/>}/>
