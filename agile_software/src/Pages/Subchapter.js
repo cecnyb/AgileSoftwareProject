@@ -3,11 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import '../Subchapter.css';
 import SideNavBar from "../Components/SideNavBar";
-//import { useAuth } from "../hooks/useAuth";
 import { app, db } from "../firebase.js";
 import {doc, getDoc, updateDoc, arrayUnion} from 'firebase/firestore';
+import useRequireAuth from '../AuthenticateUser';
+
 
 function Subchapter()  {
+    const currentUser = useRequireAuth();
     const { subchapterId } = useParams()
     const { chapterId } = useParams()
     const chapter = chapters.find(chapter => chapter.id === parseInt(chapterId))

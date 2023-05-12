@@ -1,0 +1,28 @@
+.chapter-container{
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.students-container{
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.students-child{
+    padding:5rem;
+    align-items: right;
+    justify-content: right;
+    width:30rem;
+    background-color:lightgrey;
+    border-radius: 10px;
+    border-color: black;
+    border-style: ridge;
+}
+form{
+    padding-top:10rem;
+}
+h1{
+    text-align: center;
+}
