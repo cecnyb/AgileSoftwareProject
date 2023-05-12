@@ -66,7 +66,7 @@ function HomePage() {
       </form>
     </div>
   );
-  else if(userRole == "student"){
+  else if(userRole == "teacher"){
     return(
       <div className="students-container">
         <div className = "students-child">
