@@ -20,6 +20,7 @@ function HomePage() {
   const currentUser = useRequireAuth();
 
   useEffect(() => {
+    console.log('currentUser:', currentUser);
     const fetchUserRole = async () => {
       try {
         const role = await getUserRole(currentUser);
@@ -74,8 +75,8 @@ function HomePage() {
             Dina studenter
           </h1>
           <ul>
-
-            {students.map((student) => <li>{student}</li>)}
+            {students && students.map((student) => <li>{student}</li>)}
+            {/* {students.map((student) => <li>{student}</li>)} */}
           </ul>
           <form onSubmit={handleSubmit}>
           <input type="submit" value="Logga ut" />
