@@ -23,7 +23,6 @@ function Login() {
     };
     return (
         <div className="login-container">
-            <img src={logo} alt="Logo" height={"50%"} width={"30%"}></img>
             <h1>Välkommen till din utbildning</h1>
             {error ? <div>{error}</div> : null}
             <form onSubmit={handleSubmit}>
