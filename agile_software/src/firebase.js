@@ -42,7 +42,8 @@ const signUp = async (email, password, isUtbildare) => {
         await addDoc(collection(db, "users"), {
                 uid: user.uid,
                 email: user.email,
-                role: "student"
+                role: "student",
+                completedSubchapters: [{chapter:"0", subchapter:"0"}]
               });
       }
       return true

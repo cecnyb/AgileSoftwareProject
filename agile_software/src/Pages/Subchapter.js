@@ -18,15 +18,13 @@ function Subchapter()  {
     const [disableCheckbox, setDisableCheckbox] = React.useState(false);
     //const { user } = app.useAuth();
 
-    const user = 'BoMIXFvDylRMO0QosUOA' //Den här ska användas
-    const userId = 'u4oHbZWfyMac91R2Tl98HHXuN8m2';
     const chapterCompleted = 'chapter1';  
     const subchapterCompleted = 'subchapter2';
 
     
 
-    const addSubchaptersToCompleted = async (user, chapterCompleted, subchapterCompleted )=> {
-      const userDocRef = doc(db, 'users', user);
+    const addSubchaptersToCompleted = async (currentUser, chapterCompleted, subchapterCompleted )=> {
+      const userDocRef = doc(db, 'users', currentUser);
       try {
         await updateDoc(userDocRef, {
           completedSubchapters: arrayUnion({chapter: chapterId, subchapter: subchapterId}),
@@ -39,7 +37,7 @@ function Subchapter()  {
 
     const handleChange = () => {
       setChecked(!checked); 
-      addSubchaptersToCompleted(user, chapterId, subchapterId);
+      addSubchaptersToCompleted(currentUser, chapterId, subchapterId);
       setDisableCheckbox(true);
     };
 
@@ -55,7 +53,7 @@ function Subchapter()  {
     }, [checked]); */ // run this effect whenever the `checked` value change
     
     useEffect(() => {
-      const userDocRef = doc(db, 'users', user);
+      const userDocRef = doc(db, 'users', currentUser);
       const fetchCompletedSubchapters = async () => {
         try {
           const docSnap = await userDocRef.get();
@@ -75,10 +73,10 @@ function Subchapter()  {
         }
       };
       fetchCompletedSubchapters();
-    }, [chapterId, subchapterId, user]);
+    }, [chapterId, subchapterId, currentUser]);
 
     useEffect(() => {
-      const userDocRef = doc(db, 'users', user);
+      const userDocRef = doc(db, 'users', currentUser);
       getDoc(userDocRef)
         .then((userDoc) => {
           const isCompleted = userDoc.data().completedSubchapters.some(
@@ -89,7 +87,7 @@ function Subchapter()  {
         .catch((error) => {
           console.error('Error getting document:', error);
         });
-    }, [user, chapterId, subchapterId]);
+    }, [currentUser, chapterId, subchapterId]);
 
     return (
         <div className="Lesson-Page">
