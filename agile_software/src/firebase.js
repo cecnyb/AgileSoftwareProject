@@ -23,7 +23,7 @@ const firebaseConfig = {
 };
 
 // Sign up
-const signUp = async (email, password, isUtbildare) => {
+const signUp = async (email, password, username, moderatorID, isUtbildare) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -31,18 +31,23 @@ const signUp = async (email, password, isUtbildare) => {
         password
       );
       const user = userCredential.user;
-      if (isUtbildare) {
+      if (moderatorID == "J9MJI5fgUAh72jFDoii54IiuFM43") { //if (isUtbildare) {
         await addDoc(collection(db, "users"), {
                 uid: user.uid,
                 email: user.email,
+                username: username,
                 role: "teacher",
-                students: []
+                students: [],
+                // ADD TEACHER TO SUPERMODERATOR SOMEHOW
+                //addTeacherToSupermoderator()
               });
-      } else {
+      } else { // ADD LOGIC TO LINK STUDENT TO TEACHER
         await addDoc(collection(db, "users"), {
                 uid: user.uid,
                 email: user.email,
+                username: username,
                 role: "student",
+                // ADD STUDENT TO CORRECT TEACHER SOMEHOW
                 completedSubchapters: [{chapter:"0", subchapter:"0"}]
               });
       }
