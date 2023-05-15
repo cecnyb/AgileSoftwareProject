@@ -5,6 +5,7 @@ import { signout } from '../firebase';
 import {getUserRole} from '../GetUserRole';
 import {getStudents} from '../GetStudents';
 import {getUserEmail} from '../GetUserEmail';
+import {getUserProgress} from '../GetUserProgress';
 import React, { useEffect, useState } from 'react';
 import "../Homepage.css"; 
 
@@ -13,14 +14,26 @@ const handleSubmit = async (e) => {
   signout();
 };
 
+function calculateProgress(progressCount, chapter) {
+  console.log("Progress Array: " + progressCount)
+  const totalCount = progressCount;
+  
+  
+  const totalChapters = (parseInt(chapter)+1) * 2;
+  console.log("chapter: " + chapter + ", count:" + progressCount + " calc: " + totalChapters)
+  const progressPercentage = (totalCount / totalChapters) * 100;
+  return progressPercentage;
+}
+
 
 function HomePage() {
   const [userRole, setUserRole] = useState(null);
   const [students, setStudents] = useState(null);
+  const [prog, setProgress] = useState(null);
   const currentUser = useRequireAuth();
 
   useEffect(() => {
-    console.log('currentUser:', currentUser);
+    console.log('UseEffect,currentUser:', currentUser);
     const fetchUserRole = async () => {
       try {
         const role = await getUserRole(currentUser);
@@ -36,6 +49,7 @@ function HomePage() {
         //const studentEmails = await userStudents.map((user) => getUserEmail(user));
         var studentEmails = [];
         for(let i = 0; i<userStudents.length; i++){
+            
             studentEmails[i] = await getUserEmail(userStudents[i]);
         }
         //const studentEmails = await getUserEmail(userStudents[0]);
@@ -44,12 +58,51 @@ function HomePage() {
     catch (error) {
       console.error('Error fetching students', error);
     }
+
+
+    };
+
+    const fetchUserProgress = async () => {
+      try {
+        const userStudents = await getStudents(currentUser);
+
+        var studentProgress = [];
+        for(let i = 0; i<userStudents.length; i++){
+          console.log("Checking progress for: " + userStudents[i])
+          var userProgress = await getUserProgress(userStudents[i]);
+          var userProgCount = new Map();
+          try{ 
+            console.log(userProgress)
+
+            for(let i = 0; i<userProgress.length;i++){
+              if(userProgCount[userProgress[i].chapter])
+                userProgCount[userProgress[i].chapter]++;
+              else
+                userProgCount.set(userProgress[i].chapter,1);
+            }
+
+            studentProgress[i] = userProgCount;
+
+          }
+          catch (error){
+            console.error("Error fetching user progress", error)
+          }
+          
+        }
+        setProgress(studentProgress)
+      } catch (error) {
+        console.error('Error fetching user progress:', error);
+      }
     };
 
     if (currentUser) {
       fetchUserRole();
       fetchStudents();
+      fetchUserProgress();
     }
+    
+
+
   }, [currentUser]);
   
   if(userRole == "student")
@@ -75,9 +128,23 @@ function HomePage() {
             Dina studenter
           </h1>
           <ul>
-            {students && students.map((student) => <li>{student}</li>)}
-            {/* {students.map((student) => <li>{student}</li>)} */}
-          </ul>
+          {students &&
+            students.map((student, index) => (
+              <li key={index}>
+                {student}
+                {prog && prog[index] && (
+                  <ul>
+                    {Array.from(prog[index].entries()).map(([chapter, count]) => (
+                      <li key={chapter}>
+                        {"Chapter " + chapter + ":  "} 
+                        <progress value={calculateProgress(prog[index].get(chapter), chapter)} max={100} />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+        </ul>
           <form onSubmit={handleSubmit}>
           <input type="submit" value="Logga ut" />
         </form>
