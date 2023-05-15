@@ -24,7 +24,6 @@ const Signup = () => {
     return (
       <>
         <div className="login-container"> 
-          <img src={logo} alt="Logo" height={"50%"} width={"30%"}></img>
           <h2>Registera dig och starta din utbildning nu!</h2>
           {error ? <div>{error}</div> : null}
           <form onSubmit={handleSubmit}>
