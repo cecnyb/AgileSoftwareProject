@@ -7,6 +7,7 @@ import {getStudents} from '../GetStudents';
 import {getUserEmail} from '../GetUserEmail';
 import {getUserProgress} from '../GetUserProgress';
 import React, { useEffect, useState } from 'react';
+import {getTitleById, getSubchapterCountById} from "../GetChapterInfo";
 import "../Homepage.css"; 
 
 const handleSubmit = async (e) => {
@@ -17,9 +18,8 @@ const handleSubmit = async (e) => {
 function calculateProgress(progressCount, chapter) {
   console.log("Progress Array: " + progressCount)
   const totalCount = progressCount;
-  
-  
-  const totalChapters = (parseInt(chapter)+1) * 2;
+  const totalChapters = getSubchapterCountById(parseInt(chapter));
+  console.log(getTitleById(parseInt(chapter)));
   console.log("chapter: " + chapter + ", count:" + progressCount + " calc: " + totalChapters)
   const progressPercentage = (totalCount / totalChapters) * 100;
   return progressPercentage;
@@ -133,10 +133,10 @@ function HomePage() {
               <li key={index}>
                 {student}
                 {prog && prog[index] && (
-                  <ul>
+                  <ul style={{ listStyleType: 'none', padding: 0 }}>
                     {Array.from(prog[index].entries()).map(([chapter, count]) => (
                       <li key={chapter}>
-                        {"Chapter " + chapter + ":  "} 
+                        {chapter + ". "+ getTitleById(parseInt(chapter)) + ":  "} 
                         <progress value={calculateProgress(prog[index].get(chapter), chapter)} max={100} />
                       </li>
                     ))}
