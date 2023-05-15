@@ -74,13 +74,18 @@ function HomePage() {
           <h1>
             Dina studenter
           </h1>
-          <ul>
-            {students && students.map((student) => <li>{student}</li>)}
+          <div className="student-boxes">
+            {students && students.map((student) => (
+              <div className="student-box" key={student}>
+                {student}
+              </div>
+              ))
+            }
             {/* {students.map((student) => <li>{student}</li>)} */}
-          </ul>
-          <form onSubmit={handleSubmit}>
-          <input type="submit" value="Logga ut" />
-        </form>
+          </div>
+          <form onSubmit={handleSubmit} className="login-form">
+            <input type="submit" value="Logga ut" className="login-button" />
+          </form>
         </div>
       </div>
     )
