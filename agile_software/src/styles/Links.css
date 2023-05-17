@@ -1,13 +1,14 @@
-/* Links.css */
-
 .no-underline {
-    text-decoration: none;
-  }
-  
+  text-align: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+}
   .cursor-pointer {
     cursor: pointer;
   }
-  
   
   .Links a {
     position: relative;
@@ -17,6 +18,8 @@
   }
   
   .Links a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #007bff;
+    /*ändra färgen ovan*/
   }
   
