@@ -13,14 +13,15 @@ function SubchapterComponent(props) {
     return (
         <section key={props.subchapter.id} className="Links">
           <div>
-            <div >
-              <h2>
+            <div className="title"> 
+              
                 <Link
+                className="no-underline cursor-pointer"
                   to={'/chapter/'+ props.chapterId +'/subchapter/' + props.subchapter.id}
                 >
                   {props.subchapter.title}
                 </Link>
-              </h2>
+              
             </div>
           </div>
         </section>

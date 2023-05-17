@@ -7,6 +7,7 @@ import {getStudents} from '../GetStudents';
 import {getUserEmail} from '../GetUserEmail';
 import React, { useEffect, useState } from 'react';
 import "../Homepage.css"; 
+import waterimg from "../Vattenskoter.png";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -59,10 +60,12 @@ function HomePage() {
   if(userRole == "student")
   return (
     <div className="chapter-container">
-      <header>
+      <header className="title-box">
+      <div >
       <h1 className = "title">
         Välkommen till din utbildning {currentUser.email}
       </h1>
+      </div>
       <h2 className="user-role">{userRole}view</h2>
       </header>
       <div className="chapter-list">
@@ -72,6 +75,9 @@ function HomePage() {
         <ChapterComponent chapter={chapter} />
       </li>
       ))}
+      </div>
+      <div className="waterimg">
+        <img src={process.env.PUBLIC_URL + "/Images/Water.png"} alt="" />
       </div>
       <footer>
       <form onSubmit={handleSubmit}>
