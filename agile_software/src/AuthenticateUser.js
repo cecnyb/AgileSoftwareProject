@@ -9,7 +9,7 @@ const useRequireAuth = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user) {
-        navigate('/');
+        //navigate('/');
       }
     });
 

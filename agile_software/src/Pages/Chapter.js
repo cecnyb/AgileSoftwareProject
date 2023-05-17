@@ -7,6 +7,7 @@ import useRequireAuth from '../AuthenticateUser';
 
 function Chapter() {
         const currentUser = useRequireAuth();
+        console.log("Debug 5 - after useRequireAuth user is: " + currentUser)
         const { chapterId } = useParams()
         const chapter = chapters.find(chapter => chapter.id === parseInt(chapterId))
         return (
