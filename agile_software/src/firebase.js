@@ -6,7 +6,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
   } from "firebase/auth";
-  import { getFirestore, addDoc, collection } from "firebase/firestore";
+import { getFirestore, setDoc, collection, updateDoc, arrayUnion, doc, where } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -31,8 +31,24 @@ const signUp = async (email, password, username, moderatorID, isUtbildare) => {
         password
       );
       const user = userCredential.user;
-      if (moderatorID == "J9MJI5fgUAh72jFDoii54IiuFM43") { //if (isUtbildare) {
-        await addDoc(collection(db, "users"), {
+      const addStudentToTeacher = async(moderatorID, studentUID) =>{
+        const db = getFirestore();
+        const teacherRef = doc(db, 'users', moderatorID);
+        
+        await updateDoc(teacherRef, {
+          students: arrayUnion(studentUID)
+        });
+      };
+      const addTeacherToSuperMod = async(superModeratorID, teacherUID) =>{
+        const db = getFirestore();
+        const teacherRef = doc(db, 'users', superModeratorID);
+        
+        await updateDoc(teacherRef, {
+          students: arrayUnion(teacherUID)
+        });
+      };
+      if (moderatorID == "J9MJI5fgUAh72jFDoii54IiuFM43") { //FIXA ETT NYTT SUPERMODERATOR KONTO SÅ ATT ID BLIR RÄTT I FIRESTORE. DÄREFTER ÄNDRA TILL RÄTT ID HÄR
+        await setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 email: user.email,
                 username: username,
@@ -41,15 +57,16 @@ const signUp = async (email, password, username, moderatorID, isUtbildare) => {
                 // ADD TEACHER TO SUPERMODERATOR SOMEHOW
                 //addTeacherToSupermoderator()
               });
+        addTeacherToSuperMod("J9MJI5fgUAh72jFDoii54IiuFM43", user.uid);
       } else { // ADD LOGIC TO LINK STUDENT TO TEACHER
-        await addDoc(collection(db, "users"), {
+        await setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 email: user.email,
                 username: username,
                 role: "student",
-                // ADD STUDENT TO CORRECT TEACHER SOMEHOW
                 completedSubchapters: [{chapter:"0", subchapter:"0"}]
               });
+        addStudentToTeacher(moderatorID, user.uid);
       }
       return true
     } catch (error) {
