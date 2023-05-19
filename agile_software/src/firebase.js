@@ -6,7 +6,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
   } from "firebase/auth";
-import { getFirestore, setDoc, collection, updateDoc, arrayUnion, doc, where } from "firebase/firestore";
+import { getFirestore, setDoc, updateDoc, arrayUnion, doc, where } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
