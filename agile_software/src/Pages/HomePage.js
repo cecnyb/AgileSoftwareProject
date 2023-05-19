@@ -54,8 +54,11 @@ function HomePage() {
         //const studentEmails = await getUserEmail(userStudents[0]);
         setStudents(studentUsernames);
       }
+      catch (error) {
+        console.error('Error fetching students:', error);
+      }
     };
-  }
+  
 
     if (currentUser) {
       fetchUserRole();
