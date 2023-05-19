@@ -6,27 +6,40 @@ import SideNavBar from "../Components/SideNavBar";
 import { app, db } from "../firebase.js";
 import {doc, getDoc, updateDoc, arrayUnion} from 'firebase/firestore';
 import useRequireAuth from '../AuthenticateUser';
-
+import { getAdditionalUserInfo } from 'firebase/auth';
+import getSubchapterChecks from '../GetSubchapterChecks';
 
 function Subchapter()  {
-    /* const currentUser = useRequireAuth();
-    console.log("Debug 3 - after useRequireAuth user is: " + currentUser) */
+    const currentUser = useRequireAuth();
+    //const [userDocRef, setUserdocRef] = useState(null);
+    var userDocRef = null;
+
+
+    //const currentUser = "d2Hv2QHF0XwttcI8Kj9h";
+    console.log("Debug 3 - after useRequireAuth user is: " + currentUser) 
     const { subchapterId } = useParams()
     const { chapterId } = useParams()
     const chapter = chapters.find(chapter => chapter.id === parseInt(chapterId))
     const subchapter = chapter.subchapters.find(subchapter => subchapter.id === parseInt(subchapterId))
-   /*  const [checked, setChecked] = React.useState(false);
-    const [disableCheckbox, setDisableCheckbox] = React.useState(false); */
-    //const { user } = app.useAuth();
-/* 
+     const [checked, setChecked] = React.useState(false);
+    const [disableCheckbox, setDisableCheckbox] = React.useState(false); 
+
     const chapterCompleted = 'chapter1';  
-    const subchapterCompleted = 'subchapter2'; */
+    const subchapterCompleted = 'subchapter2'; 
 
-    
-
-   /*  const addSubchaptersToCompleted = async (currentUser, chapterCompleted, subchapterCompleted )=> {
-      const userDocRef = doc(db, 'users', currentUser);
+     const addSubchaptersToCompleted = async (currentUser, chapterCompleted, subchapterCompleted )=> {
+      console.log("Adding chapters")
+      
+      //const userDocRef = doc(db, 'users', currentUser);
+      /*if(currentUser){
+        fetchUserDocRef();
+        console.log("Adding subchapters to completed", currentUser)
+      }*/
       try {
+        console.log("chapter: ",chapterId);
+        console.log("subchapter:", subchapterId);
+        const userDocRef = await getSubchapterChecks(currentUser);
+        console.log("userdocref", userDocRef)
         await updateDoc(userDocRef, {
           completedSubchapters: arrayUnion({chapter: chapterId, subchapter: subchapterId}),
         });
@@ -34,35 +47,53 @@ function Subchapter()  {
       } catch (error) {
         console.error('Error updating completed subchapters:', error, userDocRef);
       }
-    }; */
+    }; 
 
-/*     const handleChange = () => {
+     const handleChange = () => {
+      console.log("Handle change")
       setChecked(!checked); 
-      addSubchaptersToCompleted(currentUser, chapterId, subchapterId);
+      addSubchaptersToCompleted(currentUser, chapterId, subchapterId); 
       setDisableCheckbox(true);
-    }; */
+    }; 
+     
+    useEffect( () => {
+      async function awaitFunction() {
 
-/*     useEffect(() => {
-      const persistedValue = localStorage.getItem('myComponent.checked');
-      if (persistedValue !== null) {
-        setChecked(JSON.parse(persistedValue));
-      }
-    }, []); 
+      console.log("Useeffect 1 ", userDocRef)
+      
+      //const userDocRef = getDoc(doc(db, 'users', currentUser));
+      //if(currentUser){
+        //fetchUserDocRef();
+        //console.log("Inside if, userdocref is: " + userDocRef)
+      //}
 
-    useEffect(() => {
-      localStorage.setItem('myComponent.checked', JSON.stringify(checked));
-    }, [checked]); */ // run this effect whenever the `checked` value change
-  /*   
-    useEffect(() => {
-      console.log("Debug 1 - pre use effect")
-      console.log("Current user is: " + currentUser)
-      console.log("db is: " + db)
-      const userDocRef = getDoc(doc(db, 'users', currentUser));
-      console.log("Debug 2 - after userrefdoc")
-      const fetchCompletedSubchapters = async () => {
+      
+     // const fetchUserDocRef = async () => {
+  
         try {
-          const docSnap = await userDocRef.get();
-          if (docSnap.exists()) {
+          const userDocRef =  getSubchapterChecks(currentUser);
+        } catch (error) {
+          console.error('Error fetching userDocRef:', error);
+        }
+     // }; 
+      /*
+      if(currentUser){
+        console.log("Fetching that user doc")
+        fetchUserDocRef();
+      };
+      
+*/ 
+
+
+      //const fetchCompletedSubchapters = async () => {
+        console.log("fetchCompletedSubchapters")
+
+        try {
+          //const userDocRef = await fetchUserDocRef();
+          console.log("User ref pre docsnap" , userDocRef)
+          const docSnap = userDocRef;
+          console.log("DOC SNAP" , docSnap)
+          if (docSnap) {
             const data = docSnap.data();
             const completedSubchapters = data.completedSubchapters || [];
             const isSubchapterCompleted = completedSubchapters.some((subchapter) => {
@@ -74,17 +105,21 @@ function Subchapter()  {
             setChecked(false);
           }
         } catch (error) {
-          console.log('Error getting document:', error);
+          console.error('Error getting document:', error);
         }
-      };
-      fetchCompletedSubchapters();
-    }, [chapterId, subchapterId, currentUser]);
+     // };
+     // fetchCompletedSubchapters();
 
-    useEffect(() => {
-      const userDocRef = doc(db, 'users', currentUser);
+      
+      console.log("Useeffect 2. UsedDocRef", userDocRef)
+      //const userDocRef = (doc(db, 'users', currentUser));
+/*       if(currentUser){
+        console.log("")
+        fetchUserDocRef();
+      } */
       getDoc(userDocRef)
-        .then((userDoc) => {
-          const isCompleted = userDoc.data().completedSubchapters.some(
+        .then((userDocRef) => {
+          const isCompleted = userDocRef.data().completedSubchapters.some(
             subchapter => subchapter.chapter === chapterId && subchapter.subchapter === subchapterId
           );
           setChecked(isCompleted);
@@ -92,7 +127,10 @@ function Subchapter()  {
         .catch((error) => {
           console.error('Error getting document:', error);
         });
-    }, [currentUser, chapterId, subchapterId]); */
+      }
+      awaitFunction();
+
+    }, [chapterId, subchapterId, currentUser]);
 
     return (
         <div className="Lesson-Page">
@@ -143,7 +181,7 @@ function Subchapter()  {
           </Link>
          )}
         </div>
-{/*         {!checked && (
+         {!checked && (
         <Checkbox
         label="My Value"
          value={checked}
@@ -154,13 +192,13 @@ function Subchapter()  {
 
         {checked && (
           <h3>Completed</h3>
-        )} */}
+        )} 
 
       </div>
     );
 };
 
-/* const Checkbox = ({ label, value, onChange }) => {
+ const Checkbox = ({ label, value, onChange }) => {
   const handleCheckboxChange = (event) => {
     onChange(event);
   };
@@ -170,6 +208,6 @@ function Subchapter()  {
         {(value === true) ? (label = "Completed") : (label = "Mark as completed")}
     </label>
   );
-}; */
+}; 
 
 export default Subchapter;
