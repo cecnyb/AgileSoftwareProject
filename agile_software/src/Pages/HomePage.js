@@ -32,11 +32,10 @@ function HomePage() {
         console.error('Error fetching user role:', error);
       }
     };
-
     const fetchUserName = async () => {
       try {
         //const userRef = doc(db, 'users', currentUser.uid);
-        const name = await getUserName(currentUser);
+        const name = await getUserName(currentUser.uid);
         setUserName(name);
       } catch (error) {
         console.error('Error fetching user name:', error);
