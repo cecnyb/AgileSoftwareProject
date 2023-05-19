@@ -103,7 +103,7 @@ function Subchapter()  {
           { <h1>{subchapter.title}</h1> }
           
          
-          <SideNavBar chapter={chapter}/> 
+          <SideNavBar/> 
           </header>
        
           
