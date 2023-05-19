@@ -44,10 +44,10 @@ const signUp = async (email, password, username, moderatorID, isUtbildare) => {
         const teacherRef = doc(db, 'users', superModeratorID);
         
         await updateDoc(teacherRef, {
-          students: arrayUnion(teacherUID)
+          customers: arrayUnion(teacherUID)
         });
       };
-      if (moderatorID == "J9MJI5fgUAh72jFDoii54IiuFM43") { //FIXA ETT NYTT SUPERMODERATOR KONTO SÅ ATT ID BLIR RÄTT I FIRESTORE. DÄREFTER ÄNDRA TILL RÄTT ID HÄR
+      if (moderatorID == "UyxsyIap7AN05fG9JJ1mg3tWXRk1") { // TEACHER SIGN UP
         await setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 email: user.email,
@@ -57,8 +57,16 @@ const signUp = async (email, password, username, moderatorID, isUtbildare) => {
                 // ADD TEACHER TO SUPERMODERATOR SOMEHOW
                 //addTeacherToSupermoderator()
               });
-        addTeacherToSuperMod("J9MJI5fgUAh72jFDoii54IiuFM43", user.uid);
-      } else { // ADD LOGIC TO LINK STUDENT TO TEACHER
+        addTeacherToSuperMod("UyxsyIap7AN05fG9JJ1mg3tWXRk1", user.uid);
+         } else if (moderatorID == "AA307vk5uper3989") { // SUPERMODERATOR SIGN UP
+            await setDoc(doc(db, "users", user.uid), {
+                    uid: user.uid,
+                    email: user.email,
+                    username: username,
+                    role: "Supermoderator",
+                    customers: []
+            });
+      } else { // STUDENT SIGN UP
         await setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 email: user.email,
