@@ -1,9 +1,8 @@
 .Lesson-Page {
     border: 3px solid rgb(83, 45, 200);
-    padding: 220px;
+    padding: 60px;
+    padding-left: 240px;
     font-size: 18px;
     border-radius: 5px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-
-
   }

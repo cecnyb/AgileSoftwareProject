@@ -1,24 +1,25 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../styles/SideNavBar.css";
+import chapters from "../chapters.js";
 
-
-function SideNavBar(props) {
+function SideNavBar() {
   return (
     <nav className="navigation">
       <ul>
-        
         <li>
-          <h3 className="chapter-title">{props.chapter.id}{' '}{props.chapter.title}</h3>
         </li>
-        {props.chapter.subchapters.map((subchapter) => (
-          <li key={subchapter.id}>
-            <Link
-              className="subchapter-link"
-              to={`/chapter/${props.chapter.id}/subchapter/${subchapter.id}`}
-            >
-              {props.chapter.id}{'.'}{subchapter.id}{' '}{subchapter.title}
-            </Link>
+        {chapters.map((chapter) => (
+          <li key={chapter.id}>
+            <h3 className="chapter-title">{chapter.id}{' '}{chapter.title}</h3>
+            {chapter.subchapters.map((subchapter) => (
+              <Link
+                className="subchapter-link"
+                to={`/chapter/${chapter.id}/subchapter/${subchapter.id}`}
+              >
+                {chapter.id}{'.'}{subchapter.id}{' '}{subchapter.title}
+              </Link>
+          ))}
           </li>
         ))}
       </ul>

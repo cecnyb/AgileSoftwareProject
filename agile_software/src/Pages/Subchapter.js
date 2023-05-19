@@ -14,14 +14,13 @@ function Subchapter()  {
     //const [userDocRef, setUserdocRef] = useState(null);
     var userDocRef = null;
 
-
     //const currentUser = "d2Hv2QHF0XwttcI8Kj9h";
     console.log("Debug 3 - after useRequireAuth user is: " + currentUser) 
     const { subchapterId } = useParams()
     const { chapterId } = useParams()
     const chapter = chapters.find(chapter => chapter.id === parseInt(chapterId))
     const subchapter = chapter.subchapters.find(subchapter => subchapter.id === parseInt(subchapterId))
-     const [checked, setChecked] = React.useState(false);
+    const [checked, setChecked] = React.useState(false);
     const [disableCheckbox, setDisableCheckbox] = React.useState(false); 
 
     const chapterCompleted = 'chapter1';  
@@ -40,7 +39,7 @@ function Subchapter()  {
         console.log("subchapter:", subchapterId);
         const userDocRef = await getSubchapterChecks(currentUser);
         console.log("userdocref", userDocRef)
-        await updateDoc(userDocRef, {
+        await updateDoc(userDocRef.ref, {
           completedSubchapters: arrayUnion({chapter: chapterId, subchapter: subchapterId}),
         });
         console.log('Completed subchapters updated successfully.');
@@ -59,7 +58,7 @@ function Subchapter()  {
     useEffect( () => {
       async function awaitFunction() {
 
-      console.log("Useeffect 1 ", userDocRef)
+      console.log("Useeffect 1 ")
       
       //const userDocRef = getDoc(doc(db, 'users', currentUser));
       //if(currentUser){
@@ -71,7 +70,7 @@ function Subchapter()  {
      // const fetchUserDocRef = async () => {
   
         try {
-          const userDocRef =  getSubchapterChecks(currentUser);
+          const userDocRef = getSubchapterChecks(currentUser);
         } catch (error) {
           console.error('Error fetching userDocRef:', error);
         }
@@ -90,7 +89,7 @@ function Subchapter()  {
 
         try {
           //const userDocRef = await fetchUserDocRef();
-          console.log("User ref pre docsnap" , userDocRef)
+          //console.log("User ref pre docsnap" , userDocRef)
           const docSnap = userDocRef;
           console.log("DOC SNAP" , docSnap)
           if (docSnap) {
@@ -111,23 +110,28 @@ function Subchapter()  {
      // fetchCompletedSubchapters();
 
       
-      console.log("Useeffect 2. UsedDocRef", userDocRef)
+    //  console.log("Useeffect 2. UsedDocRef", userDocRef)
       //const userDocRef = (doc(db, 'users', currentUser));
 /*       if(currentUser){
         console.log("")
         fetchUserDocRef();
       } */
-      getDoc(userDocRef)
-        .then((userDocRef) => {
-          const isCompleted = userDocRef.data().completedSubchapters.some(
-            subchapter => subchapter.chapter === chapterId && subchapter.subchapter === subchapterId
-          );
-          setChecked(isCompleted);
-        })
-        .catch((error) => {
-          console.error('Error getting document:', error);
-        });
-      }
+      try {
+        const userDocRef = await getSubchapterChecks(currentUser);
+        getDoc(userDocRef.ref)
+          .then((userDocRef) => {
+            const isCompleted = userDocRef.data().completedSubchapters.some(
+              subchapter => subchapter.chapter === chapterId && subchapter.subchapter === subchapterId
+            );
+            setChecked(isCompleted);
+          })
+          .catch((error) => {
+            console.error('Error getting document:', error);
+          });
+        } catch(error){
+          console.error('Error getting document ', error)
+        }
+    }
       awaitFunction();
 
     }, [chapterId, subchapterId, currentUser]);
@@ -141,7 +145,7 @@ function Subchapter()  {
           { <h1>{subchapter.title}</h1> }
           
          
-          <SideNavBar chapter={chapter}/> 
+          <SideNavBar/> 
           </header>
        
           

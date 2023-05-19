@@ -6,7 +6,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
   } from "firebase/auth";
-  import { getFirestore, addDoc, collection } from "firebase/firestore";
+import { getFirestore, setDoc, updateDoc, arrayUnion, doc, where } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,7 +23,7 @@ const firebaseConfig = {
 };
 
 // Sign up
-const signUp = async (email, password, isUtbildare) => {
+const signUp = async (email, password, username, moderatorID, isUtbildare) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -31,20 +31,50 @@ const signUp = async (email, password, isUtbildare) => {
         password
       );
       const user = userCredential.user;
-      if (isUtbildare) {
-        await addDoc(collection(db, "users"), {
+      const addStudentToTeacher = async(moderatorID, studentUID) =>{
+        const db = getFirestore();
+        const teacherRef = doc(db, 'users', moderatorID);
+        
+        await updateDoc(teacherRef, {
+          students: arrayUnion(studentUID)
+        });
+      };
+      const addTeacherToSuperMod = async(superModeratorID, teacherUID) =>{
+        const db = getFirestore();
+        const teacherRef = doc(db, 'users', superModeratorID);
+        
+        await updateDoc(teacherRef, {
+          customers: arrayUnion(teacherUID)
+        });
+      };
+      if (moderatorID == "UyxsyIap7AN05fG9JJ1mg3tWXRk1") { // TEACHER SIGN UP
+        await setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 email: user.email,
+                username: username,
                 role: "teacher",
-                students: []
+                students: [],
+                // ADD TEACHER TO SUPERMODERATOR SOMEHOW
+                //addTeacherToSupermoderator()
               });
-      } else {
-        await addDoc(collection(db, "users"), {
+        addTeacherToSuperMod("UyxsyIap7AN05fG9JJ1mg3tWXRk1", user.uid);
+         } else if (moderatorID == "AA307vk5uper3989") { // SUPERMODERATOR SIGN UP
+            await setDoc(doc(db, "users", user.uid), {
+                    uid: user.uid,
+                    email: user.email,
+                    username: username,
+                    role: "Supermoderator",
+                    customers: []
+            });
+      } else { // STUDENT SIGN UP
+        await setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 email: user.email,
+                username: username,
                 role: "student",
                 completedSubchapters: [{chapter:"0", subchapter:"0"}]
               });
+        addStudentToTeacher(moderatorID, user.uid);
       }
       return true
     } catch (error) {
