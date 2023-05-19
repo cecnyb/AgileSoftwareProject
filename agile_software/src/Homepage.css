@@ -121,6 +121,11 @@ footer {
   background-color: #c4e3fc;
 }
 
+.chapter-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
 
 h2 {
   font-size: 18px;
@@ -135,19 +140,56 @@ h2 {
 }
 
 .student-box {
-  width: 30%; /* Adjust the width as needed */
+  width: 100%; /* Adjust the width as needed */
   flex-shrink: 0;
   background-color: #f2f2f2;
   border-radius: 5px;
   padding: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: left;
   font-size: 1.2rem;
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid #ccc;
 }
+
+.student-name {
+  font-weight: bold;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.progress-bars {
+  flex-grow: 1;
+  
+}
+.chapter-title {
+  text-align: left;
+  flex-grow: 1;
+  width: 10rem;
+  font-size: 14px;
+  margin-right: 1rem;
+  white-space: nowrap; /* Prevent the title from wrapping to a new line */
+  overflow: hidden; /* Hide any overflowing text */
+  text-overflow: ellipsis; /* Add an ellipsis (...) if the text overflows */
+}
+
+.progress-container {  
+  display: flex;
+  align-items: center;
+  width: 100%; /* Adjust the width as desired */
+  
+}
+
+
+progress {
+  width: 100%;
+  height: 20px;
+  margin-top: 5px;
+}
+
+
 
 .login-form {
   display: flex;
