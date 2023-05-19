@@ -129,7 +129,7 @@ function Subchapter()  {
             console.error('Error getting document:', error);
           });
         } catch(error){
-          console.error('ERRRORRRRRR', error)
+          console.error('Error getting document ', error)
         }
     }
       awaitFunction();
