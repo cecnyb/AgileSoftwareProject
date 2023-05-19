@@ -1,6 +1,6 @@
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 
-export const getUserEmail = async (currentUser) => {
+export const getUserName = async (currentUser) => {
   try {
     const db = getFirestore();
     const usersCollectionRef = collection(db, 'users');
@@ -9,7 +9,7 @@ export const getUserEmail = async (currentUser) => {
     const userDoc = usersSnapshot.docs[0];
     if (userDoc) {
       const userData = userDoc.data();
-      return userData.email;
+      return userData.username;
     }
     return null;
   } catch (error) {
@@ -18,4 +18,4 @@ export const getUserEmail = async (currentUser) => {
   }
 };
 
-export default getUserEmail;
+export default getUserName;

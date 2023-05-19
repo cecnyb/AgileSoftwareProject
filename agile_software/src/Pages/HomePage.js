@@ -4,7 +4,7 @@ import useRequireAuth from '../AuthenticateUser';
 import { signout } from '../firebase';
 import {getUserRole} from '../GetUserRole';
 import {getStudents} from '../GetStudents';
-import {getUserEmail} from '../GetUserEmail';
+import {getUserName} from '../GetUserEmail';
 import React, { useEffect, useState } from 'react';
 import "../Homepage.css"; 
 
@@ -16,6 +16,7 @@ const handleSubmit = async (e) => {
 
 function HomePage() {
   const [userRole, setUserRole] = useState(null);
+  const [userName, setUserName] = useState(null);
   const [students, setStudents] = useState(null);
   const currentUser = useRequireAuth();
 
@@ -29,17 +30,26 @@ function HomePage() {
         console.error('Error fetching user role:', error);
       }
     };
+    const fetchUserName = async () => {
+      try {
+        //const userRef = doc(db, 'users', currentUser.uid);
+        const name = await getUserName(currentUser);
+        setUserName(name);
+      } catch (error) {
+        console.error('Error fetching user name:', error);
+      }
+    };
     const fetchStudents = async() =>{
       try {
         const userStudents = await getStudents(currentUser);
         //const studentEmails = userStudents.forEach(getUserEmail)
         //const studentEmails = await userStudents.map((user) => getUserEmail(user));
-        var studentEmails = [];
+        var studentUsernames = [];
         for(let i = 0; i<userStudents.length; i++){
-            studentEmails[i] = await getUserEmail(userStudents[i]);
+          studentUsernames[i] = await getUserName(userStudents[i]);
         }
         //const studentEmails = await getUserEmail(userStudents[0]);
-        setStudents(studentEmails);
+        setStudents(studentUsernames);
       }
     catch (error) {
       console.error('Error fetching students', error);
@@ -49,6 +59,7 @@ function HomePage() {
     if (currentUser) {
       fetchUserRole();
       fetchStudents();
+      fetchUserName();
     }
   }, [currentUser]);
   
@@ -56,7 +67,7 @@ function HomePage() {
   return (
     <div className="chapter-container">
       <h1>
-        Välkommen till din utbildning {currentUser.email}
+        Välkommen till din utbildning {userName}
       </h1>
       <h2>Du är en: {userRole}</h2>
       {chapters.map((chapter) => (
