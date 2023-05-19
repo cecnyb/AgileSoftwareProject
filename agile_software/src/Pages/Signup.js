@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp } from "../firebase";
 import "../Login.css"; 
-import logo from  "../VKLogo.png";
 
 
 const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
+    const [moderatorID, setmoderatorID] = useState("");
     const [isUtbildare, setIsUtbildare] = useState("");
     const [error, seterror] = useState("");
   
@@ -15,8 +16,10 @@ const Signup = () => {
       e.preventDefault();
       setEmail("");
       setPassword("");
+      setUsername("");
+      setmoderatorID("");
       setIsUtbildare("");
-      const res = await signUp(email, password, isUtbildare);
+      const res = await signUp(email, password, username, moderatorID, isUtbildare);
       if (res.error) seterror(res.error)
    
     };
@@ -43,15 +46,22 @@ const Signup = () => {
               required
               onChange={(e) => setPassword(e.target.value)}
             />
-          <label>
-            Utbildare:
-            <input
-              name="isUtbildare"
-              type="checkbox"
-              checked={isUtbildare} //Funkar ej att unchecka checkboxen
-              onChange={(e) => setIsUtbildare(e.target.value)}
-            />
-          </label>
+          <input
+              type="text"
+              name="username"
+              value={username}
+              placeholder="Ditt namn"
+              required
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          <input
+              type="text"
+              name="moderatorID"
+              value={moderatorID}
+              placeholder="Skriv in den ID kod du fått"
+              required
+              onChange={(e) => setmoderatorID(e.target.value)}
+            />
             <button type="submit">Registrera dig</button>
           </form>
           <p>

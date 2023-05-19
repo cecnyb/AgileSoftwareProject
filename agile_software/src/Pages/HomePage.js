@@ -32,10 +32,12 @@ function HomePage() {
         console.error('Error fetching user role:', error);
       }
     };
+
     const fetchUserName = async () => {
       try {
-        const userName = await getUserName(currentUser.uid)
-        setUserName(userName);
+        //const userRef = doc(db, 'users', currentUser.uid);
+        const name = await getUserName(currentUser);
+        setUserName(name);
       } catch (error) {
         console.error('Error fetching user name:', error);
       }
@@ -52,10 +54,11 @@ function HomePage() {
         //const studentEmails = await getUserEmail(userStudents[0]);
         setStudents(studentUsernames);
       }
-    catch (error) {
-      console.error('Error fetching students', error);
-    }
+      catch (error) {
+        console.error('Error fetching students:', error);
+      }
     };
+  
 
     if (currentUser) {
       fetchUserRole();
