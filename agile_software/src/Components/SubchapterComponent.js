@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
+import '../styles/Links.css'
 
 /**
  * A component with a link to a corresponding subchapter
@@ -10,17 +11,17 @@ import React from 'react'
 
 function SubchapterComponent(props) {
     return (
-        <section key={props.subchapter.id} className="summary">
+        <section key={props.subchapter.id} className="Links">
           <div>
-            <div className="title">
-              <h2>
+            <div className="title"> 
+              
                 <Link
-                  className="no-underline cursor-pointer"
+                className="no-underline cursor-pointer"
                   to={'/chapter/'+ props.chapterId +'/subchapter/' + props.subchapter.id}
                 >
                   {props.subchapter.title}
                 </Link>
-              </h2>
+              
             </div>
           </div>
         </section>

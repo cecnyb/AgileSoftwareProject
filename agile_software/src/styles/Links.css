@@ -1,0 +1,25 @@
+.no-underline {
+  text-align: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+}
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  .Links a {
+    position: relative;
+    color: #007bff;
+    font-weight: bold;
+    padding: 0 120px;
+  }
+  
+  .Links a:hover {
+    text-decoration: none;
+    color: #007bff;
+    /*ändra färgen ovan*/
+  }
+  
