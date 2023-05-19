@@ -5,7 +5,9 @@ import { signout } from '../firebase';
 import {getUserRole} from '../GetUserRole';
 import {getStudents} from '../GetStudents';
 import {getUserName} from '../GetUserEmail';
+import {getUserProgress} from '../GetUserProgress';
 import React, { useEffect, useState } from 'react';
+import {getTitleById, getSubchapterCountById} from "../GetChapterInfo";
 import "../Homepage.css"; 
 import waterimg from "../Vattenskoter.png";
 
@@ -13,6 +15,16 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   signout();
 };
+
+function calculateProgress(progressCount, chapter) {
+  console.log("Progress Array: " + progressCount)
+  const totalCount = progressCount;
+  const totalChapters = getSubchapterCountById(parseInt(chapter));
+  console.log(getTitleById(parseInt(chapter)));
+  console.log("chapter: " + chapter + ", count:" + progressCount + " calc: " + totalChapters)
+  const progressPercentage = (totalCount / totalChapters) * 100;
+  return progressPercentage;
+}
 
 
 function HomePage() {
