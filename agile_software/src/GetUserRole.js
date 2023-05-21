@@ -1,3 +1,4 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 
 export const getUserRole = async (currentUser) => {
@@ -9,8 +10,11 @@ export const getUserRole = async (currentUser) => {
     const userDoc = usersSnapshot.docs[0];
     if (userDoc) {
       const userData = userDoc.data();
+      console.log("userDoc found with role null: " + userDoc)
       return userData.role;
     }
+    console.log("userDoc not found: " + userDoc)
+
     return null;
   } catch (error) {
     console.error('Error retrieving user email:', error);

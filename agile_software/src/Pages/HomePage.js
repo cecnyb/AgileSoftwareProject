@@ -5,6 +5,7 @@ import { signout } from '../firebase';
 import {getUserRole} from '../GetUserRole';
 import {getStudents} from '../GetStudents';
 import {getUserName} from '../GetUserEmail';
+import {getModerators} from '../GetModerators';
 import React, { useEffect, useState } from 'react';
 import "../Homepage.css"; 
 import waterimg from "../Vattenskoter.png";
@@ -19,6 +20,8 @@ function HomePage() {
   const [userRole, setUserRole] = useState(null);
   const [userName, setUserName] = useState(null);
   const [students, setStudents] = useState(null);
+  const [moderators, setModerators] = useState(null);
+
   const currentUser = useRequireAuth();
   console.log("Debug 4 - after useRequireAuth user is: " + currentUser)
 
@@ -57,13 +60,34 @@ function HomePage() {
         console.error('Error fetching students:', error);
       }
     };
+
+    const fetchModerators = async() =>{
+      try {
+        const userModerators = await getModerators(currentUser);
+        //const studentEmails = userStudents.forEach(getUserEmail)
+        //const studentEmails = await userStudents.map((user) => getUserEmail(user));
+        var moderatorUsernames = [];
+        for(let i = 0; i<userModerators.length; i++){
+          moderatorUsernames[i] = await getUserName(userModerators[i]);
+        }
+        //const studentEmails = await getUserEmail(userStudents[0]);
+        setModerators(moderatorUsernames);
+        console.log("fetched mods are:" + userModerators);
+      }
+      catch (error) {
+        console.error('Error fetching moderators:', error);
+      }
+    };
   
 
-    if (currentUser) {
       fetchUserRole();
-      fetchStudents();
+      if(userRole == "teacher"){
+        fetchStudents();
+      }else if(userRole == "supermoderator"){
+        fetchModerators();
+      }
       fetchUserName();
-    }
+   
   }, [currentUser]);
   
   if(userRole == "student")
@@ -94,7 +118,7 @@ function HomePage() {
       </footer>
     </div>
   );
-  else if(userRole == "teacher"){
+  else if(userRole === "teacher"){
     return(
       <div className="students-container">
         <div className = "students-child">
@@ -117,7 +141,8 @@ function HomePage() {
       </div>
     )
   }
-  else if(userRole == "supermoderator"){
+  else if(userRole === "supermoderator"){
+    console.log(moderators);
     return(
       <div className="students-container">
         <div className = "students-child">
@@ -125,9 +150,9 @@ function HomePage() {
             Moderatorer
           </h1>
           <div className="student-boxes">
-            {students && students.map((student) => (
-              <div className="student-box" key={student}>
-                {student}
+            {moderators && moderators.map((moderator) => (
+              <div className="student-box" key={moderator}>
+                {moderator}
               </div>
               ))
             }
