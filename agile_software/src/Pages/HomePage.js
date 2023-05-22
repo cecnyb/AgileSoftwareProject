@@ -81,16 +81,16 @@ function HomePage() {
   
 
       fetchUserRole();
-      if(userRole == "teacher"){
+      if(userRole === "teacher"){
         fetchStudents();
-      }else if(userRole == "supermoderator"){
+      }else if(userRole === "supermoderator"){
         fetchModerators();
       }
       fetchUserName();
    
   }, [currentUser]);
   
-  if(userRole == "student")
+  if(userRole === "student")
   return (
     <div className="chapter-container">
       <header className="title-box">
@@ -143,6 +143,7 @@ function HomePage() {
   }
   else if(userRole === "supermoderator"){
     console.log(moderators);
+    console.log("userrole is: " + userRole)
     return(
       <div className="students-container">
         <div className = "students-child">
