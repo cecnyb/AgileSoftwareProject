@@ -20,10 +20,7 @@ function calculateProgress(progressCount, chapter) {
   const totalCount = progressCount;
   const totalChapters = getSubchapterCountById(parseInt(chapter));
   const progressPercentage = (progressCount / totalChapters) * 100;
-  //console.log("Chapter: ", chapter)
-  //console.log("Progress: ", progressCount)
- // console.log("Antal kapitel: ", totalChapters)
- 
+
   return progressPercentage;
 }
 
@@ -34,10 +31,9 @@ function HomePage() {
   const [students, setStudents] = useState(null);
   const [prog, setProgress] = useState(null);
   const currentUser = useRequireAuth();
- // console.log("Debug 4 - after useRequireAuth user is: " + currentUser)
 
   useEffect(() => {
-   // console.log('currentUser:', currentUser);
+
     const fetchUserRole = async () => {
       try {
         const role = await getUserRole(currentUser);
@@ -78,26 +74,22 @@ function HomePage() {
 
         var studentProgress = [];
         for(let i = 0; i<userStudents.length; i++){
-          console.log("Checking progress for: " + userStudents[i])
+        
           var userProgress = await getUserProgress(userStudents[i]);
           var userProgCount = new Map();
           try{ 
-            console.log("PRogress", userProgress)
-
+          
             for(let i = 0; i<userProgress.length;i++){
               if(userProgCount.get(userProgress[i].chapter)){
                 userProgCount.set(userProgress[i].chapter, userProgCount.get(userProgress[i].chapter)+1);
-                console.log("HEEEJ")
               }
               else{
                 userProgCount.set(userProgress[i].chapter,1);
-                console.log("i ", i)
               }
             }
 
 
             studentProgress[i] = userProgCount;
-            console.log("userProgCount", userProgCount)
 
           }
           catch (error){
