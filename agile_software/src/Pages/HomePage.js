@@ -135,7 +135,7 @@ function HomePage() {
       </div>
       <footer>
           <form onSubmit={handleSubmit}>
-        <input type="submit" value="Logga ut" className="logout-btn" style={{ position: "relative", width: "200px", marginLeft: "1400px", marginTop: "-1353px"}}/>
+        <input type="submit" value="Logga ut" className="logout-btn" style={{ position: "relative", width: "200px",  marginLeft: "1400px", marginTop: "-1100px"}}/>
       </form>
       </footer>
     </div>
