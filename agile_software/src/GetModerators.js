@@ -1,6 +1,6 @@
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 
-export const GetModerators = async (currentUser) => {
+export const getModerators = async (currentUser) => {
   try {
     const db = getFirestore();
     const usersCollectionRef = collection(db, 'users');
@@ -18,4 +18,4 @@ export const GetModerators = async (currentUser) => {
   }
 };
 
-export default GetModerators;
+export default getModerators;

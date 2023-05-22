@@ -63,7 +63,7 @@ const signUp = async (email, password, username, moderatorID, isUtbildare) => {
                     uid: user.uid,
                     email: user.email,
                     username: username,
-                    role: "Supermoderator",
+                    role: "supermoderator",
                     customers: []
             });
       } else { // STUDENT SIGN UP
