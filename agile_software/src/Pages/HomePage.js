@@ -5,6 +5,8 @@ import { signout } from '../firebase';
 import {getUserRole} from '../GetUserRole';
 import {getStudents} from '../GetStudents';
 import {getUserName} from '../GetUserEmail';
+import {getModerators} from '../GetModerators';
+
 import {getUserProgress} from '../GetUserProgress';
 import React, { useEffect, useState } from 'react';
 import {getTitleById, getSubchapterCountById} from "../GetChapterInfo";
@@ -29,8 +31,11 @@ function HomePage() {
   const [userRole, setUserRole] = useState(null);
   const [userName, setUserName] = useState(null);
   const [students, setStudents] = useState(null);
+  const [moderators, setModerators] = useState(null);
+
   const [prog, setProgress] = useState(null);
   const currentUser = useRequireAuth();
+  console.log("Debug 4 - after useRequireAuth user is: " + currentUser.uid)
 
   useEffect(() => {
 
@@ -65,6 +70,23 @@ function HomePage() {
       }
       catch (error) {
         console.error('Error fetching students:', error);
+      }
+    };
+
+    const fetchModerators = async() =>{
+      try {
+        const userModerators = await getModerators(currentUser);
+        //const studentEmails = userStudents.forEach(getUserEmail)
+        //const studentEmails = await userStudents.map((user) => getUserEmail(user));
+        var moderatorUsernames = [];
+        for(let i = 0; i<userModerators.length; i++){
+          moderatorUsernames[i] = await getUserName(userModerators[i]);
+        }
+        //const studentEmails = await getUserEmail(userStudents[0]);
+        setModerators(moderatorUsernames);
+      }
+      catch (error) {
+        console.error('Error fetching moderators:', error);
       }
     };
   
@@ -103,15 +125,18 @@ function HomePage() {
       }
     };
 
-    if (currentUser) {
       fetchUserRole();
-      fetchStudents();
-      fetchUserProgress();
-    }
-    
-  }, [currentUser]);
+      if(userRole === "teacher"){
+        fetchStudents();
+      }else if(userRole === "supermoderator"){
+        fetchModerators();
+      }
+      fetchUserName();
+       fetchUserProgress();
+  }, [currentUser, userRole]);
+
   
-  if(userRole == "student")
+  if(userRole === "student")
   return (
     <div className="chapter-container">
       <header className="title-box">
@@ -133,13 +158,13 @@ function HomePage() {
         <img src={process.env.PUBLIC_URL + "/Images/Water.png"} alt="" />
       </div>
       <footer>
-      <form onSubmit={handleSubmit}>
-        <input type="submit" value="Logga ut" className="logout-btn" />
+          <form onSubmit={handleSubmit}>
+        <input type="submit" value="Logga ut" className="logout-btn" style={{ position: "relative", width: "200px",  marginLeft: "1400px", marginTop: "-1100px"}}/>
       </form>
       </footer>
     </div>
   );
-  else if(userRole == "teacher"){
+  else if(userRole === "teacher"){
     return(
       <div className="students-container">
         <div className = "students-child">
@@ -173,17 +198,18 @@ function HomePage() {
       </div>
     )
   }
-  else if(userRole == "supermoderator"){
+  else if(userRole === "supermoderator"){
+    console.log("userrole is: " + userRole)
     return(
       <div className="students-container">
         <div className = "students-child">
           <h1>
-            Moderatorer
+            Dina kunder 
           </h1>
           <div className="student-boxes">
-            {students && students.map((student) => (
-              <div className="student-box" key={student}>
-                {student}
+            {moderators && moderators.map((moderator) => (
+              <div className="student-box" key={moderator}>
+                {moderator}
               </div>
               ))
             }

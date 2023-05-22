@@ -4,7 +4,7 @@
 
 **Description**
 
-An educational website about Jet Skis with the purpose of being used by clients in their own educational courses.
+This project aims to create the foundation of a website which will work as a platform for people trying to get a water scoter license. The main functionality for the website is to display the chapters and subchapters of the theory needed to get the license. The website also differentiates between different kinds of users; students, moderators and supermoderators. **The intention is for moderators to be able to overview all their students' progress, although this has not been implemented yet.**
 
 ***DAT257 specific information* - *to be removed after course/grading***
 
@@ -36,6 +36,8 @@ Maximilian Forsell
 
 The project uses the React framework, and as such node.js is required. The project also uses Firebase for managing users and the included Firestore as a database.
 
+To start the project, run the command `npm start` in the project directory (by default "agile_software").
+
 **Features**
 
 - Managing students: Moderators (i.e. educators) have an overview presented of their own students.
@@ -44,9 +46,9 @@ The project uses the React framework, and as such node.js is required. The proje
 
 **Technologies Used**
 
-- React (Node.js)
-- Firebase
-- JavaScript
+- React (Node.js) https://react.dev/ (https://nodejs.org/en)
+- Firebase https://firebase.google.com/
+- JavaScript 
 - CSS 
 
 **License**

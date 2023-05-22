@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# AgileSoftwareProject
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# VK Vattenskoterubildning
 
-## Available Scripts
+**Description**
 
-In the project directory, you can run:
+This project aims to create the foundation of a website which will work as a platform for people trying to get a water scoter license. The main functionality for the website is to display the chapters and subchapters of the theory needed to get the license. The website also differentiates between different kinds of users; students, moderators and supermoderators. **The intention is for moderators to be able to overview all their students' progress, although this has not been implemented yet.**
 
-### `npm start`
+***DAT257 specific information* - *to be removed after course/grading***
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Members**
 
-### `npm test`
+Lucas Edeslätt
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Cecilia Nyberg
 
-### `npm run build`
+Oliver Brink
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Wilhelm Swegmark
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Jonas Röst
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Maximilian Forsell
 
-### `npm run eject`
+**Trello: <https://trello.com/invite/b/iCLQVjto/ATTIa6357f14715b7ee1242d1548dd61dbdf4014B3D6/scrum-board>** 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Drive: <https://drive.google.com/drive/folders/1JbtqVFnbSp98chQEPQOnpZDIlqL-ChxE?usp=sharing>** 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Github repo: <https://github.com/cecnyb/AgileSoftwareProject>** 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+***End of DAT257 specific information***
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+**Installation**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The project uses the React framework, and as such node.js is required. The project also uses Firebase for managing users and the included Firestore as a database.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To start the project, run the command `npm start` in the project directory (by default "agile_software").
 
-### Code Splitting
+**Features**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Managing students: Moderators (i.e. educators) have an overview presented of their own students.
+- Course material: Relevant course material is available by chapter and subchapter, with easy navigation between them. 
+- Registration: New users can register when they have a reference from their teacher. Users can also register as educators, easily allowing new customers to start using the product. 
 
-### Analyzing the Bundle Size
+**Technologies Used**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- React (Node.js) https://react.dev/ (https://nodejs.org/en)
+- Firebase https://firebase.google.com/
+- JavaScript 
+- CSS 
 
-### Making a Progressive Web App
+**License**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The project is proprietary software and does not have a public license. All rights are reserved by VK Vattenskoterutbildning. Unauthorized use, reproduction, or distribution of the software is strictly prohibited. Please contact [Contact Email/Website] for more information regarding licensing and usage permissions.
 
-### Advanced Configuration
+**Contact**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Please contact [Contact Email/Website] for more information regarding this project.
 
-### Deployment
+**FAQs**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Include a list of frequently asked questions and their answers. This can help users quickly find solutions to common issues.
 
-### `npm run build` fails to minify
+**Troubleshooting**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Offer troubleshooting tips and solutions for common problems users might encounter while using the project.
+
