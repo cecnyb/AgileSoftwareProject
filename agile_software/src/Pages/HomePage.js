@@ -17,12 +17,13 @@ const handleSubmit = async (e) => {
 };
 
 function calculateProgress(progressCount, chapter) {
-  console.log("Progress Array: " + progressCount)
   const totalCount = progressCount;
   const totalChapters = getSubchapterCountById(parseInt(chapter));
-  console.log(getTitleById(parseInt(chapter)));
-  console.log("chapter: " + chapter + ", count:" + progressCount + " calc: " + totalChapters)
-  const progressPercentage = (totalCount / totalChapters) * 100;
+  const progressPercentage = (progressCount / totalChapters) * 100;
+  //console.log("Chapter: ", chapter)
+  //console.log("Progress: ", progressCount)
+ // console.log("Antal kapitel: ", totalChapters)
+ 
   return progressPercentage;
 }
 
@@ -33,10 +34,10 @@ function HomePage() {
   const [students, setStudents] = useState(null);
   const [prog, setProgress] = useState(null);
   const currentUser = useRequireAuth();
-  console.log("Debug 4 - after useRequireAuth user is: " + currentUser)
+ // console.log("Debug 4 - after useRequireAuth user is: " + currentUser)
 
   useEffect(() => {
-    console.log('currentUser:', currentUser);
+   // console.log('currentUser:', currentUser);
     const fetchUserRole = async () => {
       try {
         const role = await getUserRole(currentUser);
@@ -81,16 +82,22 @@ function HomePage() {
           var userProgress = await getUserProgress(userStudents[i]);
           var userProgCount = new Map();
           try{ 
-            console.log(userProgress)
+            console.log("PRogress", userProgress)
 
             for(let i = 0; i<userProgress.length;i++){
-              if(userProgCount[userProgress[i].chapter])
-                userProgCount[userProgress[i].chapter]++;
-              else
+              if(userProgCount.get(userProgress[i].chapter)){
+                userProgCount.set(userProgress[i].chapter, userProgCount.get(userProgress[i].chapter)+1);
+                console.log("HEEEJ")
+              }
+              else{
                 userProgCount.set(userProgress[i].chapter,1);
+                console.log("i ", i)
+              }
             }
 
+
             studentProgress[i] = userProgCount;
+            console.log("userProgCount", userProgCount)
 
           }
           catch (error){
