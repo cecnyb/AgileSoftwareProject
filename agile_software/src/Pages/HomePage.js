@@ -23,7 +23,7 @@ function HomePage() {
   const [moderators, setModerators] = useState(null);
 
   const currentUser = useRequireAuth();
-  console.log("Debug 4 - after useRequireAuth user is: " + currentUser)
+  console.log("Debug 4 - after useRequireAuth user is: " + currentUser.uid)
 
   useEffect(() => {
     console.log('currentUser:', currentUser);
@@ -72,7 +72,6 @@ function HomePage() {
         }
         //const studentEmails = await getUserEmail(userStudents[0]);
         setModerators(moderatorUsernames);
-        console.log("fetched mods are:" + userModerators);
       }
       catch (error) {
         console.error('Error fetching moderators:', error);
@@ -88,7 +87,7 @@ function HomePage() {
       }
       fetchUserName();
    
-  }, [currentUser]);
+  }, [currentUser, userRole]);
   
   if(userRole === "student")
   return (
@@ -142,13 +141,12 @@ function HomePage() {
     )
   }
   else if(userRole === "supermoderator"){
-    console.log(moderators);
     console.log("userrole is: " + userRole)
     return(
       <div className="students-container">
         <div className = "students-child">
           <h1>
-            Moderatorer
+            Dina kunder 
           </h1>
           <div className="student-boxes">
             {moderators && moderators.map((moderator) => (
