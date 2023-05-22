@@ -36,6 +36,8 @@ Maximilian Forsell
 
 The project uses the React framework, and as such node.js is required. The project also uses Firebase for managing users and the included Firestore as a database.
 
+To start the project, run the command `npm start` in the project directory (by default "agile_software").
+
 **Features**
 
 - Managing students: Moderators (i.e. educators) have an overview presented of their own students.
