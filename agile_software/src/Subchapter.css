@@ -1,8 +1,13 @@
-.Lesson-Page {
+.SubchapterContent {
     border: 3px solid rgb(83, 45, 200);
     padding: 60px;
     padding-left: 240px;
     font-size: 18px;
     border-radius: 5px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+  .LinkContainer {
+    position: fixed;
+    height: 50px;
+
   }

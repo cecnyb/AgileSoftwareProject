@@ -8,6 +8,13 @@ import {doc, getDoc, updateDoc, arrayUnion} from 'firebase/firestore';
 import useRequireAuth from '../AuthenticateUser';
 import { getAdditionalUserInfo } from 'firebase/auth';
 import getSubchapterChecks from '../GetSubchapterChecks';
+import { signout } from '../firebase';
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  signout();
+};
 
 function Subchapter()  {
     const currentUser = useRequireAuth();
@@ -138,10 +145,15 @@ function Subchapter()  {
 
     return (
         <div className="Lesson-Page">
+             <Link to="/HomePage" className="btn btn-primary" style={{ position: "fixed", marginLeft: "780px", marginTop: "10px"}}>
+              Tillbaka till startsidan
+              </Link> 
+              <form onSubmit={handleSubmit}>
+            <input type="submit" value="Logga ut" className="logout-btn" style ={{position: "relative", width: "200px", marginLeft: "2800px", marginTop: "10px"}}/>
+          </form>
+        <div className="SubchapterContent">
           <header>
-           <Link to="/HomePage" className="btn btn-primary">
-          Go back to the HomePage
-          </Link> 
+           
           { <h1>{subchapter.title}</h1> }
           
          
@@ -198,6 +210,7 @@ function Subchapter()  {
           <h3>Completed</h3>
         )} 
 
+      </div>
       </div>
     );
 };

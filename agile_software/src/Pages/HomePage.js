@@ -6,7 +6,10 @@ import {getUserRole} from '../GetUserRole';
 import {getStudents} from '../GetStudents';
 import {getUserName} from '../GetUserEmail';
 import {getModerators} from '../GetModerators';
+
+import {getUserProgress} from '../GetUserProgress';
 import React, { useEffect, useState } from 'react';
+import {getTitleById, getSubchapterCountById} from "../GetChapterInfo";
 import "../Homepage.css"; 
 import waterimg from "../Vattenskoter.png";
 
@@ -15,6 +18,16 @@ const handleSubmit = async (e) => {
   signout();
 };
 
+function calculateProgress(progressCount, chapter) {
+  console.log("Progress Array: " + progressCount)
+  const totalCount = progressCount;
+  const totalChapters = getSubchapterCountById(parseInt(chapter));
+  console.log(getTitleById(parseInt(chapter)));
+  console.log("chapter: " + chapter + ", count:" + progressCount + " calc: " + totalChapters)
+  const progressPercentage = (totalCount / totalChapters) * 100;
+  return progressPercentage;
+}
+
 
 function HomePage() {
   const [userRole, setUserRole] = useState(null);
@@ -22,6 +35,7 @@ function HomePage() {
   const [students, setStudents] = useState(null);
   const [moderators, setModerators] = useState(null);
 
+  const [prog, setProgress] = useState(null);
   const currentUser = useRequireAuth();
   console.log("Debug 4 - after useRequireAuth user is: " + currentUser.uid)
 
@@ -78,6 +92,38 @@ function HomePage() {
       }
     };
   
+    const fetchUserProgress = async () => {
+      try {
+        const userStudents = await getStudents(currentUser);
+
+        var studentProgress = [];
+        for(let i = 0; i<userStudents.length; i++){
+          console.log("Checking progress for: " + userStudents[i])
+          var userProgress = await getUserProgress(userStudents[i]);
+          var userProgCount = new Map();
+          try{ 
+            console.log(userProgress)
+
+            for(let i = 0; i<userProgress.length;i++){
+              if(userProgCount[userProgress[i].chapter])
+                userProgCount[userProgress[i].chapter]++;
+              else
+                userProgCount.set(userProgress[i].chapter,1);
+            }
+
+            studentProgress[i] = userProgCount;
+
+          }
+          catch (error){
+            console.error("Error fetching user progress", error)
+          }
+          
+        }
+        setProgress(studentProgress)
+      } catch (error) {
+        console.error('Error fetching user progress:', error);
+      }
+    };
 
       fetchUserRole();
       if(userRole === "teacher"){
@@ -86,8 +132,9 @@ function HomePage() {
         fetchModerators();
       }
       fetchUserName();
-   
+       fetchUserProgress();
   }, [currentUser, userRole]);
+
   
   if(userRole === "student")
   return (
@@ -111,8 +158,8 @@ function HomePage() {
         <img src={process.env.PUBLIC_URL + "/Images/Water.png"} alt="" />
       </div>
       <footer>
-      <form onSubmit={handleSubmit}>
-        <input type="submit" value="Logga ut" className="logout-btn" />
+          <form onSubmit={handleSubmit}>
+        <input type="submit" value="Logga ut" className="logout-btn" style={{ position: "relative", width: "200px",  marginLeft: "1400px", marginTop: "-1100px"}}/>
       </form>
       </footer>
     </div>
@@ -125,13 +172,24 @@ function HomePage() {
             Dina studenter
           </h1>
           <div className="student-boxes">
-            {students && students.map((student) => (
+            {students && students.map((student, index) => (
               <div className="student-box" key={student}>
-                {student}
+                <div className="student-name">{student}</div>
+                {prog && prog[index] && (
+                  <ul className="progress-bars" style={{ listStyleType: 'none', padding: 0 }}>
+                 {Array.from(prog[index].entries()).map(([chapter, count]) => (
+                  <li key={chapter}>
+                    <div className="progress-container">
+                      <span className="chapter-title">{chapter}. {getTitleById(parseInt(chapter))}: </span>
+                      <progress className="progress-bar" value={calculateProgress(prog[index].get(chapter), chapter)} max={100} />
+                    </div>
+                  </li>
+                ))}
+                  </ul>
+
+                )}
               </div>
-              ))
-            }
-            {/* {students.map((student) => <li>{student}</li>)} */}
+            ))}
           </div>
           <form onSubmit={handleSubmit} className="login-form">
             <input type="submit" value="Logga ut" className="login-button" />
