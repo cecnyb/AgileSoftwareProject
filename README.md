@@ -44,9 +44,9 @@ The project uses the React framework, and as such node.js is required. The proje
 
 **Technologies Used**
 
-- React (Node.js)
-- Firebase
-- JavaScript
+- React (Node.js) https://react.dev/ (https://nodejs.org/en)
+- Firebase https://firebase.google.com/
+- JavaScript 
 - CSS 
 
 **License**
