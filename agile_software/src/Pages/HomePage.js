@@ -134,8 +134,8 @@ function HomePage() {
         <img src={process.env.PUBLIC_URL + "/Images/Water.png"} alt="" />
       </div>
       <footer>
-      <form onSubmit={handleSubmit}>
-        <input type="submit" value="Logga ut" className="logout-btn" />
+          <form onSubmit={handleSubmit}>
+        <input type="submit" value="Logga ut" className="logout-btn" style={{ position: "relative", width: "200px", marginLeft: "1400px", marginTop: "-1353px"}}/>
       </form>
       </footer>
     </div>
